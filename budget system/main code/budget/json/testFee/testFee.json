@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": ""
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "测试化验加工内容,测试化验加工单位,计量单位,单价(万元/计量单位),数量,总金额(万元),备注说明",
+            "listValue":[
+                            "测试化验加工内容,测试化验加工单位11,计量单位,单价,数量,总金额,备注说明",
+                            "测试化验加工内容,测试化验加工单位12,计量单位,单价,数量,总金额,备注说明"
+                        ]
+            },
+        "description":{
+            "title_desc": "测试化验加工费的开支范围",
+            "description": "在课题研究开发过程中支付给外单位（包括课题承担单位内部独立经济核算单位）的检验、测试、化验及加工等费用。",
+            "title_list": "测试化验加工费的相关要求",
+            "list": "避免课题之间的重复列支,避免与其他预算科目重复,避免明显超过公允水平,本单位因测试实验加工所发生的费用应分解到别的相应科目"
+        }
+        },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

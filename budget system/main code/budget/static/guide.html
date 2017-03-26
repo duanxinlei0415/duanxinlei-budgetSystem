@@ -1,0 +1,124 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title>新建向导</title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<@h.headDetail />
+	<@h.layer />
+	<link rel="stylesheet" href="${ctx}/css/index.css" type="text/css"/>
+	<link rel="stylesheet" href="${ctx}/css/main.css" type="text/css"/>
+	<style>
+	.content{overflow: hidden; width: 800px; margin: 40px auto; }
+	.content a{color: black; }
+	/*向导*/
+	/*.ui-main{float: left; background: #e6eaee; overflow: hidden; padding: 50px 0; }*/
+	.ui-area{height: 400px; width: 500px; font-size: 18px; position: relative; float: left; 
+		background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+	    background-repeat: repeat-x;
+	    border: 1px solid #d4d4d4;}
+	.ui-area h3{font-size: 16px; font-weight: normal; padding: 10px 20px; }
+	.ui-area .program{width: 80px; height: 25px; margin: 10px auto 0; border: 3px solid orange; text-align: center; padding: 5px; }
+	.ui-area .h-hr{height: 50px; width: 0; border: 1px solid orange; margin: 0 auto; }
+	.ui-area .hr{margin: 0 auto; overflow: hidden; position: relative; width: 306px; }
+	.ui-area .b-hr1{width: 150px; height: 40px; border: 2px solid orange; border-right-width: 1px; float: left; border-bottom-width: 0; }
+	.ui-area .b-hr2{width: 150px; height: 40px; border: 2px solid orange; border-left-width: 1px; float: left; border-bottom-width: 0;}
+	.ui-area .jiantou{content: ''; border: 8px solid orange; border-bottom-width: 0; border-left-color: transparent;; border-right-color: transparent; display: inline-block; position: relative; top: -15px; left: -5px; margin: 0 37px 0 97px; }
+	.ui-area .jiantou-no3{content: ''; border: 8px solid orange; border-bottom-width: 0; border-left-color: transparent;; border-right-color: transparent; display: inline-block; position: relative; top: -15px; left: -5px; margin: 0 30px 0 99px; }
+	.ui-area ul{overflow: hidden; margin-top: -20px; margin-left: -5px; font-size: 16px; }
+	.ui-area ul li{float: left; width: 80px; height: 20px; border: 3px solid orange; text-align: center; padding: 5px; margin: 0 -1px 0 56px; }
+	.ui-area ul .alink{background-color: orange; color:white;}
+	.ui-area ul .lino3{margin-right: 10px; }
+
+	.ui-tips{height: 400px; width: 295px; background-color: #e6eaee; float: left; font-size: 14px; border: 1px solid #d4d4d4;}
+	.ui-tips div{margin: 28px 0; background-color: #eee; padding: 10px 15px 5px 30px; text-align: left;}
+	.ui-tips ol li{list-style: decimal inside none;}
+	.ui-tips span{margin: 0 5px; color: #46b8da;}
+	.ui-tips span:before{content: "\e117"; }
+</style>	
+</head>
+<body>
+	<@h.header />
+	<div class="content">
+		<!--主体内容-->
+		<div class="ui-main">
+			<div class="ui-area">
+				<h3>请选择要建立的内容</h3>
+				<div class="program"><a href="javascript:void(0);">项目</a></div>
+				<div class="h-hr"></div>
+				<div class="hr">
+					<span class="b-hr1"></span><span class="b-hr2"></span>
+				</div>
+				<span class="jiantou"></span><span class="jiantou"></span><span class="jiantou-no3"></span>
+				<ul>
+					<li></li>
+					<li class="alink"><a id="taskBtn" href="javascript:void(0);">课题</a></li>
+					<li class="lino3"></li>
+				</ul>
+				<!--重复-->
+				<div class="h-hr"></div>
+				<div class="hr">
+					<span class="b-hr1"></span><span class="b-hr2"></span>
+				</div>
+				<span class="jiantou"></span><span class="jiantou"></span><span class="jiantou-no3"></span>
+				<ul>
+					<li></li>
+					<li class="alink"><a id="subTaskBtn" href="javascript:void(0);">参与单位</a></li>
+					<li class="lino3"></li>
+				</ul>
+			</div>
+
+			<div class="ui-tips">
+				<!-- <div><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-close"></span>我是项目牵头单位，请点击左侧“项目”</div> -->
+				<div>
+					<p><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-close"></span>课题牵头单位，请点击左侧“课题”。您可以：</p>
+					 <ol>
+					 	<li>管理课题参与单位</li>
+					 	<li>分配课题预算</li>
+					 	<li>轻松将参与单位预算汇总成课题预算</li>
+					 	<li>一键导出预算文件</li>
+					 </ol>
+				</div>
+				<div>
+					<p><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-close"></span>课题参与单位，请点击左侧“参与单位”。您可以：</p>
+					<ol>
+						<li>编制本单位在课题中的预算（包括预算说明）</li>
+						<li>通过邀请码将本单位预算关联到课题预算</li>
+					</ol>
+				</div>
+			</div>
+		</div>
+	</div>
+	<@h.footer />
+</body>
+<script type="text/javascript">
+	$(function(){
+		$('#taskBtn').click(function(){
+			var index = layer.open({
+				type:2,
+				title:"课题管理",
+				area:['500px','400px'],
+				maxmin: false,
+				content:ctx+'/task/task/update/pre'
+			});
+			layer.full(index);
+		});
+		
+		//绑定新增角色
+		$('#subTaskBtn').bind('click',function(){
+			var index = layer.open({
+				type:2,
+				title:"参与单位管理",
+				area:['500px','400px'],
+				maxmin: false,
+				content:ctx+'/task/subTask/editSummy/pre'
+			});
+			layer.full(index);
+		});
+	});
+</script>
+</html>
+</#escape>

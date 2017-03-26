@@ -1,0 +1,656 @@
+require.config({
+    paths: {
+        jquery: 'jquery-1.12.1.min',
+        input: 'input',
+        config: 'config',
+        Util: 'Util',
+        Big: 'Big'
+    },
+    shim: {
+        'jquery': {
+            deps: ['jquery-1.12.1.min'],
+            exports: 'jquery'
+        }
+    }
+});
+
+define(['require', 'jquery', 'config', 'Util', 'Big'], function (require, $, config, Util, Big) {
+    // ajax 地址
+    var ajaxRouteMap = {
+        assignBudgets: {
+        	downLoad:ctx + '/task/moneyStatistics/budgetList/json',
+            upLoad:ctx + '/task/task/taskDetail'
+        },
+        settlementSchedule: {
+        	downLoad:ctx + '/task/moneyStatistics/settleList/json'
+        }
+    }
+    // 获取全局的课题ID
+    function getTaskId() {
+        return window.taskId;
+    }
+
+    // 计算国拨和自筹总计
+    function getWholeTotal(options) {
+        $('#assign-total-value span').html(function () {
+            var selfValue = parseFloat(options.selfValue) || 0;
+            var countryValue = parseFloat(options.countryValue) || 0;
+            return parseFloat(selfValue + countryValue).toFixed(2);
+        });
+    }
+
+    //tab切换
+    var tagSwitch = function () {
+        var map = {
+            "assign-budgets": $('.main-wrap.assign'),
+            "settlement-schedule": $('.main-wrap.view')
+        }
+        $('.mini-nav a').on('click', function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+            $(this).addClass('current').siblings().removeClass('current');
+            var prop = $(this).data('navType');
+            for (var i in map) {
+                if (i === prop) {
+                    map[prop].show();
+                } else {
+                    map[i].hide();
+                }
+            }
+        });
+    }();
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++=
+    assignDownLoad({
+        $table: $('.country-assign table'),
+        url: ajaxRouteMap['assignBudgets']['downLoad'],
+        contenteditable: true,
+        callBack: click2upload,
+        taskId: getTaskId(),
+        upLoadUrl: ajaxRouteMap['assignBudgets']['upLoad']
+    });
+    // 	分配数据拉取
+    function assignDownLoad(options, complete) {
+        var $table = options.$table,
+            url = options.url,
+            contenteditable = options.contenteditable,
+            fn = options.callBack || function () {
+                },
+            taskId = options.taskId,
+            upLoadUrl = options.upLoadUrl;
+            console.log(taskId);
+        $.ajax({
+            //type: 'POST',
+            url: url,
+            data: {"taskId": taskId}
+        }).done(function (msg) {//国拨
+            if (msg.statusCode != 200) {
+                return;
+            }
+            var $thead = $table.children('thead'),
+                $tbody = $table.children('tbody');
+            //国拨绘制表头
+            creatTh($thead.children('tr'), msg.map, true);
+            //国拨数据行
+            for (var i = 0, length = msg.data.length; i < length; i++) {
+                if (i === 0) {//百分比
+                    creatTd($tbody.children('tr').eq(0), msg.data[i], true);
+                }
+                creatTd($tbody.children('tr').eq(i + 1), msg.data[i]);
+            }
+        }).done(function (msg) {//自筹
+            if (msg.statusCode != 200) {
+                return;
+            }
+            var $table = $('.self-assign table'),
+                $thead = $table.children('thead'),
+                $tbody = $table.children('tbody');
+            //自筹绘制表头
+            creatTh($thead.children('tr'), msg.map, false);
+            //自筹数据行
+            var index = msg.data.length - 1;
+            creatTd($tbody.children('tr').eq(0), msg.data[index], true);//百分比
+            creatTd($tbody.children('tr').eq(1), msg.data[index]);
+        }).done(function (msg) {//刷新国拨和自筹的总计计算
+            getWholeTotal({
+                selfValue: $('.self-assign table tbody tr').eq(1).children('td').eq(1).find('input').val(),
+                countryValue: $('.country-assign table tbody tr').eq(1).children('td').eq(1).find('input').val()
+            });
+        }).done(function (msg) {//行检验
+            // 还是很暴力的方式
+//            $('.country-assign table tbody tr').each(function (index, el) {
+//                if (index == 0) {
+//                    return true;
+//                }
+//                $(this).children('td').eq(1).find('input').trigger('input');
+//            });
+        	for (var i = 1; i <= 4; i++) {
+                $('.country-assign table tbody tr').eq(1).children('td').each(function(index, el){
+                    if(index<3){
+                        return true;
+                    }
+                    $(this).find('input').trigger('input');
+                });
+            }
+            $('.self-assign table tbody tr').each(function (index, el) {
+                if (index == 0) {
+                    return true;
+                }
+                $(this).children('td').eq(1).find('input').trigger('input');
+            });
+            // 超级暴力方式
+            /*$('input:not(:disabled)').each(function(index, el){
+             $(this).trigger('input');
+             });*/
+        }).done(function (msg) {//计算百分比
+            countPercent($('.main-wrap.assign .country-assign table').children('tbody').children('tr'), 1, 3, 0, 1);
+            countPercent($('.main-wrap.assign .self-assign table').children('tbody').children('tr'), 1, 3, 0, 1);
+        }).done(function (msg) {//回调函数，提交
+            if (msg.statusCode != 200) {
+                return;
+            }
+            fn.call(null, msg);
+        });
+
+        // 绘制表头
+        function creatTh($tr, map, bool) {//bool==true 表示国拨
+            var thHTML = '', maxLength = 10, start, end;
+            if (bool) {
+                start = 1;
+                end = map.length / 2;
+            } else {
+                start = map.length / 2 + 1;
+                end = map.length;
+            }
+            for (var i = start; i <= end; i++) {
+                map[i].length > 10 ? function () {
+                    thHTML += '<th title="' + map[i] + '">' + map[i].substring(0, maxLength + 1) + '…</th>';
+                }() : function () {
+                    thHTML += '<th>' + map[i] + '</th>';
+                }();
+
+            }
+            $tr.append(thHTML);
+        }
+
+        // 绘制数据行——单行 percentBool是否是百分比行
+        function creatTd($tr, array, percentBool) {
+            var tdHTML = '';
+            if (!!percentBool) {//百分比行
+                tdHTML = '<td></td><td></td>';
+                for (var i = 2, length = array.length; i < length; i++) {
+                    tdHTML += '<td><input class="form-control" type="text" placeholder="0.00￥" readonly="readonly" disabled="disabled"></td>';
+                }
+            } else {
+                for (var i = 0, length = array.length; i < length; i++) {
+                    if (i == 1) {
+                        tdHTML += '<td><input class="form-control" type="text" readonly="readonly" disabled="disabled" placeholder="0.00￥" value="' + array[i] + '"></td>';
+                    } else {
+                        tdHTML += '<td><input class="form-control" type="text" placeholder="0.00￥" value="' + array[i] + '"></td>';
+                    }
+                }
+            }
+            $tr.append(tdHTML);
+        }
+    }
+
+    // 分配数据提交
+    function click2upload(msg) {
+        $('.main-wrap.assign .form-action button').eq(0).off('click').on('click', function () {
+            event.preventDefault();
+            event.stopPropagation();
+            // 行判断是否有红框，就是这么暴力
+            var rowFlag = true;
+            $('.main-wrap.assign input:not(:disabled)').each(function (index, el) {
+                if (this.style.cssText.length > 0) {
+                    rowFlag = false;
+                    return false;
+                }
+            });
+            if (!rowFlag) {
+                alert('您分配的数据还有某行没有达标(横向合计应等于各单位金额之和)，注意红框提示，请仔细检查');
+                return;
+            }
+            // 纵向校验
+            var arrayError = judgeBudgetSumByColumn($('.country-assign .table'), 1);
+            if (arrayError.length > 0) {
+                var str = arrayError.join();
+                alert('您分配的数据还有如下几列没有达标，国拨即纵向之和小于总计。列数为第' + str + '列，请仔细检查');
+                return;
+            }
+            var arrayUpload = generateData(msg);
+            $.ajax({
+                type: 'POST',
+                url: ajaxRouteMap['assignBudgets']['upLoad'],
+                data: {"taskId": getTaskId(), "data": JSON.stringify(arrayUpload)}
+            }).done(function (msg) {
+                if (msg.message) {
+                    alert(msg.message);
+                }
+                // 提交成功 刷新已遍结算进度数据
+                viewDownLoad({
+                    $table: $('.main-wrap.view table'),
+                    url: ajaxRouteMap['settlementSchedule']['downLoad'],
+                    taskId: getTaskId()
+                });
+                console.log(JSON.stringify(arrayUpload));
+            });
+        });
+        function generateData(msg) {//需要剔除各国拨总计 自筹总计
+            // 需要上传的数据
+            var array = [];
+            // 获取单位
+            var field = [];
+            for (var i = 3, length = msg.map.length / 2; i <= length; i++) {
+                field.push(msg.map[i].slice(0, -2));//删除末尾“国拨”、“自筹” 单位只传一遍
+            }
+            array.push(field);
+            // 获取国拨的数据行
+            var trValue;
+            $('.country-assign table tbody tr').each(function (index) {
+                trValue = [];
+                if (index == 0) {
+                    return true;
+                }
+                $(this).children('td').each(function (_index) {
+                    if (_index == 0 || _index == 1 || _index == 2) {
+                        return true;
+                    }
+                    trValue.push($(this).find('input').val().replace(/(^\s+)|(\s+$)/g, ''));
+                });
+                array.push(trValue);
+            });
+            // 获取自筹的数据行
+            $('.self-assign table tbody tr').each(function (index) {
+                trValue = [];
+                if (index == 0) {
+                    return true;
+                }
+                $(this).children('td').each(function (_index) {
+                    if (_index == 0 || _index == 1 || _index == 2) {
+                        return true;
+                    }
+                    trValue.push($(this).find('input').val().replace(/(^\s+)|(\s+$)/g, ''));
+                });
+                array.push(trValue);
+            });
+            return array;
+        }
+    };
+    // ++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    // 国拨 和 自筹分配数据填写
+    assignCheck($('.main-wrap.assign .country-assign table'), true);
+    assignCheck($('.main-wrap.assign .self-assign table'), false);
+    // 按行计算总计
+    function judgeBudgetSumByRow(currentEl) {
+        var $tr = $(currentEl).parent().parent(),
+            trIndex = $tr.parent().parent().index(),
+            tdIndex = $(currentEl).parent().index(),
+            total = parseFloat($tr.children('td').eq(1).find('input').val() || 0),
+            completeTotal = Big(0.00).toFixed(2);
+        // 累加合计
+        $tr.children('td').each(function (index, el) {
+            if (index == 0 || index == 1 || index == 2) {
+                return true;
+            }
+            completeTotal = Big($(this).find('input').val() || 0).plus(completeTotal);
+        });
+        completeTotal = Big(completeTotal).toFixed(2);
+        // 各单位输入变动 刷新计算的合计
+        if (tdIndex != 1) {
+            $tr.children('td').eq(2).find('input').val(completeTotal);
+        }
+        if (completeTotal != total) {
+            $tr.find('input').each(function (index, el) {
+                if (index == 0 || index == 1) {
+                    this.style.cssText = 'border:1px solid red;';
+                } else {
+                    return true;
+                }
+            });
+            console.log('校验失败' + completeTotal);
+        } else {
+            $tr.find('input').each(function (index, el) {
+                if (index == 0 || index == 1) {
+                    this.style.cssText = '';
+                } else {
+                    return true;
+                }
+                console.log('校验通过');
+            });
+        }
+
+        return (completeTotal == total);
+    }
+
+    function assignCheck($table, bool) {//bool 是否有计算公式
+        var $tbody = $table.children('tbody');
+        // 可输入input的正则限制规则
+        var reg = config.regConfig.moneyLargeReg;
+        $table.undelegate('input', 'input').delegate('input', 'input', function (event) {
+            if (isNaN(parseFloat(this.value))) {
+                this.value = '';
+            }
+            if (!(this.value.match(reg))) {
+                this.value = this.value.slice(0, -1);
+            }
+
+            // 行校验，计算百分比
+            var $tr = $(this).parent().parent(),
+                trIndex = $tr.index(),
+                tdIndex = $(this).parent().index(),
+                flag = judgeBudgetSumByRow(this);
+            if (trIndex == 1 && flag) {//总计行计算百分比
+                countPercent($table.children('tbody').children('tr'), 1, 3, 0, 1);
+            }
+            // 刷新总计
+            if (trIndex == 1) {
+                getWholeTotal({
+                    selfValue: $('.self-assign table tbody tr').eq(1).children('td').eq(1).find('input').val(),
+                    countryValue: $('.country-assign table tbody tr').eq(1).children('td').eq(1).find('input').val()
+                });
+            }
+            // 是否走计算公式
+            if (bool && tdIndex == 1) {
+                // 根据国拨总计 和 购置设备费 计算间接费用（最大值） 和 绩效支出（最大值）
+                var $appropriationExpenditure = $tbody.children('tr').eq(1).children('td').eq(1).find('input'),//国拨总计
+                    $equipmentPurchasePost = $tbody.children('tr').eq(2).children('td').eq(1).find('input'),//购置设备费
+                    $indirectExpenditure = $tbody.children('tr').eq(3).children('td').eq(1).find('input'),//间接费用
+                    $performanceFee = $tbody.children('tr').eq(4).children('td').eq(1).find('input');//绩效支出
+                var value1 = parseFloat($appropriationExpenditure.val()) || 0,
+                    value2 = parseFloat($equipmentPurchasePost.val()) || 0,
+                    value3 = parseFloat($indirectExpenditure.val()),
+                    value4 = parseFloat($performanceFee.val());
+                if (value1 < value2) {
+                    value2='0.00';
+                    $equipmentPurchasePost.val(value2);
+                }
+
+                var outArray = calculate(value1, value2);
+                if (trIndex == 1 || trIndex == 2) {//触发了上两行
+                    $indirectExpenditure.val(outArray[0]);
+                    $performanceFee.val(outArray[1]);
+                    judgeBudgetSumByRow($indirectExpenditure[0]);
+                    judgeBudgetSumByRow($performanceFee[0]);
+                } else {//触发了下两行
+                    if (isNaN(value3) || value3 > outArray[0]) {
+                        $indirectExpenditure.val(outArray[0]);
+                        judgeBudgetSumByRow($indirectExpenditure[0]);
+                    }
+                    if (isNaN(value4) || value4 > outArray[1]) {
+                        $performanceFee.val(outArray[1]);
+                        judgeBudgetSumByRow($performanceFee[0]);
+                    }
+                }
+            }
+        });
+
+        // 根据国拨总计 和 购置设备费 计算间接费用（最大值） 和 绩效支出（最大值）
+        function calculate(value1, value2) {
+            // var tmp = 0;
+            var tmpBig=(0);
+            if (value1 - value2 >= 1165) {
+                tmpBig=Big(value1).minus(Big(value2)).minus(1000).times(0.1).plus(165).div(1.1);
+                // tmp = ((value1 - value2 - 1000) * 0.1 + 165) / 1.1;
+            } else if (value1 - value2 < 1165 && value1 - value2 >= 600) {
+                tmpBig=Big(value1).minus(Big(value2)).minus(500).times(0.13).plus(100).div(1.13);
+                // tmp = ((value1 - value2 - 500) * 0.13 + 100) / 1.13;
+            } else if (value1 - value2 < 600) {
+                tmpBig=Big(value1).minus(Big(value2)).times(0.2).div(1.2);
+                // tmp = ((value1 - value2) * 0.2) / 1.2;
+            }
+            ;
+            var outArray = [];
+            // outArray.push(tmp.toFixed(2));
+            outArray.push(tmpBig.toFixed(2));
+            // outArray.push(((value1 - tmp - value2) * 0.05).toFixed(2));
+            outArray.push(Big(value1).minus(tmpBig).minus(Big(value2)).times(0.05).toFixed(2));
+            return outArray;
+        }
+    }
+
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    viewDownLoad({
+        $table: $('.main-wrap.view table'),
+        url: ajaxRouteMap['settlementSchedule']['downLoad'],
+        taskId: getTaskId()
+    });
+    // 查看数据的拉取
+    function viewDownLoad(options, complete) {
+        $.ajax({
+            //type: 'POST',
+            url: options.url,
+            data: {"taskId": options.taskId}
+        }).done(function (msg) {//国拨构建表头
+            if (msg.statusCode != 200) {
+                return;
+            }
+            var $table = options.$table,
+                $thead = $table.eq(0).children('thead');
+            var thHTML = '',
+                maxLength = 10;
+            for (var i = 0, length = msg.map.countryNames.length; i < length; i++) {
+                msg.map.countryNames[i].length > 10 ? function () {
+                    thHTML += '<th title="' + msg.map.countryNames[i] + '">' + msg.map.countryNames[i].substring(0, maxLength + 1) + '…</th>';
+                }() : function () {
+                    thHTML += '<th>' + msg.map.countryNames[i] + '</th>';
+                }();
+            }
+            //$thead.children('tr').append(thHTML);
+            if($thead.children('tr').children().length>1){
+                thHTML = $thead.children('tr').children().eq(0).prop('outerHTML') + thHTML;
+                $thead.children('tr').html(thHTML);
+            }else{
+                $thead.children('tr').append(thHTML);
+            }
+        }).done(function (msg) {//自筹构建表头
+            if (msg.statusCode != 200) {
+                return;
+            }
+            var $table = options.$table,
+                $thead = $table.eq(1).children('thead');
+            var thHTML = '',
+                maxLength = 10;
+            for (var i = 0, length = msg.map.selfNames.length; i < length; i++) {
+                msg.map.selfNames[i].length > 10 ? function () {
+                    thHTML += '<th title="' + msg.map.selfNames[i] + '">' + msg.map.selfNames[i].substring(0, maxLength + 1) + '…</th>';
+                }() : function () {
+                    thHTML += '<th>' + msg.map.selfNames[i] + '</th>';
+                }();
+            }
+            //$thead.children('tr').append(thHTML);
+            if($thead.children('tr').children().length>1){
+                thHTML = $thead.children('tr').children().eq(0).prop('outerHTML') + thHTML;
+                $thead.children('tr').html(thHTML);
+            }else{
+                $thead.children('tr').append(thHTML);
+            }
+        }).done(function (msg) {//国拨数据填充
+            var copyMsg = {};
+            copyMsg.map = msg.map;
+            copyMsg.data = msg.data.slice(0, msg.data.length / 2);
+            renderTableData(options.$table.eq(0), copyMsg);
+        }).done(function (msg) {//自筹数据填充
+            var copyMsg = {};
+            copyMsg.map = msg.map;
+            copyMsg.data = msg.data.slice(msg.data.length / 2, msg.data.length);
+            renderTableData(options.$table.eq(1), copyMsg);
+        }).done(function (msg) {//点击实现弹层
+            $('.main-wrap.view').undelegate('td', 'click').delegate('td', 'click', function (event) {
+                if ($(this).index() < 4) {
+                    return;
+                }//排除前3列
+                if ($(this).parent().index() < 2) {
+                    return;
+                }//排除前2行
+                var sTaskId = $(this).data('staskid');//继续用原值 或者 节点缓存值
+                var typeIndex = $(this).parent().index() - 5;
+                (typeIndex < 0) && (typeIndex = 0);
+                viewPop(sTaskId, typeIndex);
+            });
+        });
+    }
+
+    // 构建表格数据DOM
+    function renderTableData($table, msg) {
+        var $tbody = $table.children('tbody');
+        if (msg.data.length === 0) {
+            return;
+        }
+        //填充数据
+        var trHtml,
+            trCountHtml = '';
+        //填充经费支出 到 绩效支出
+        for (var i = 0; i < msg.data.length; i++) {
+            trHtml = '';
+            for (var j = 0; j < msg.data[i].length; j++) {
+            	/*
+                if(msg.data[i][j].split('.')[1].length<2){
+                   msg.data[i][j] = msg.data[i][j]+'0';
+                }
+                */
+                if (j <= 2) {
+                    trHtml += '<td>' +
+                        '<input class="form-control" readonly="readonly" disabled="disabled" type="text" value="' + msg.data[i][j] + '">' +
+                        '</td>';
+                } else {
+                    trHtml += '<td style="cursor:pointer;" data-staskid="' + msg.map.staskIds[j - 3] + '">' +
+                        '<input style="cursor:pointer;" class="form-control" readonly="readonly" type="text" value="' + msg.data[i][j] + '">' +
+                        '</td>';
+                }
+            }
+            ;
+            //$tbody.children('tr').eq(i + 2).append(trHtml);
+            if($tbody.children('tr').eq(i + 2).children().length>1){
+                trHtml = $tbody.children('tr').eq(i + 2).children().eq(0).prop('outerHTML') + trHtml;
+                $tbody.children('tr').eq(i + 2).html(trHtml);
+            }else{
+                $tbody.children('tr').eq(i + 2).append(trHtml);
+            }
+        }
+        ;
+        //总计
+        for (i = 0; i < msg.data[0].length; i++) {
+            trCountHtml += '<td><input class="form-control" readonly="readonly" disabled="disabled" type="text" value="' + msg.data[0][i] + '"></td>';
+        }
+        ;
+        //$tbody.children('tr').eq(1).append(trCountHtml);
+        if($tbody.children('tr').eq(1).children().length>1){
+            trCountHtml = $tbody.children('tr').eq(1).children(0).eq(0).prop('outerHTML') + trCountHtml;
+            $tbody.children('tr').eq(1).html(trCountHtml);
+        }else{
+            $tbody.children('tr').eq(1).append(trCountHtml);
+        }
+
+        //百分比
+        trCountHtml = '<td></td><td></td><td></td>';//空3格
+        if (msg.data[0][2] == 0) {//汇总的合计等于0调整为1
+            msg.data[0][2] = 1;
+        }
+        for (i = 0; i < msg.map.staskIds.length; i++) {
+            trCountHtml += '<td><input class="form-control" readonly="readonly" disabled="disabled" type="text" value="' + Big(msg.data[0][i + 3]).times(100).div(msg.data[0][2]).toFixed(2) + '%"></td>';
+        }
+        ;
+        //$tbody.children('tr').eq(0).append(trCountHtml);
+        if($tbody.children('tr').eq(0).children().length>1){
+            trCountHtml = $tbody.children('tr').children().eq(0).prop('outerHTML') + trCountHtml;
+            $tbody.children('tr').eq(0).html(trCountHtml);
+        }else{
+            $tbody.children('tr').eq(0).append(trCountHtml);
+        }
+    }
+
+    //用于判断总计大于等于下面的累加
+    /*
+     $table：对应的表格
+     sumTrNo：总计所在tbody行数
+     countStartNo: 各项开始列数
+     */
+
+    function judgeBudgetSumByColumn($table, sumTrNo) {
+        var sumComptedByColumn = [], array = [];
+
+        //从0开始索引,计算每列总计
+        for (var i = sumTrNo + 1; i < $table.children('tbody').children('tr').length; i++) {
+            for (var j = 0; j < $table.children('tbody').children('tr').eq(sumTrNo).children('td').length; j++) {
+                sumComptedByColumn[j] = (sumComptedByColumn[j] || 0) + (parseFloat($table.children('tbody').children('tr').eq(i).children('td').eq(j).find('input').val()) || 0);
+            }
+        }
+        //判断是否小于
+        for (var k = 0; k < $table.children('tbody').children('tr').eq(sumTrNo).children('td').length; k++) {
+            if ((parseFloat($table.children('tbody').children('tr').eq(sumTrNo).children('td').eq(k).find('input').val()) || 0) < sumComptedByColumn[k]) {
+                array.push(k);
+            }
+            ;
+        }
+        return array;
+    }
+
+    //只用于分配，计算百分比，两位小数。
+    /*
+     $tr：表格的tbody的tr集合
+     sumNo：总计所在列数
+     coutStartNo：百分比开始计算的列数
+     percentTrNo：百分比所在行
+     thisTrNo：各单位总计行
+     */
+    function countPercent($tr, sumNo, coutStartNo, percentTrNo, thisTrNo) {
+        //得到总计
+        var sumTmpBig = Big(0);
+        var valueBig;
+        var percent;
+        for (var i = coutStartNo; i < $tr.eq(thisTrNo).children('td').length; i++) {
+            valueBig = Big($tr.eq(thisTrNo).children('td').eq(i).find('input').val() || 0);
+            sumTmpBig=sumTmpBig.plus(valueBig);
+        }
+        (sumTmpBig.toString() == '0') && (sumTmpBig = Big(1));
+
+        //计算百分比，并塞入对应位置
+        for (i = coutStartNo; i < $tr.eq(percentTrNo).children('td').length; i++) {
+            $tr.eq(percentTrNo).children('td').eq(i).find('input').val(function () {
+                valueBig=Big($tr.eq(thisTrNo).children('td').eq(i).find('input').val()||0);
+                percent=valueBig.times(100).div(sumTmpBig).toFixed(2)+'%';
+                return percent;
+            });
+        }
+    }
+
+    // 课题负责人查看单位填写信息的弹层
+    function viewPop(sTaskId, typeIndex) {
+        window.top.sTaskId = sTaskId;
+        // $('iframe').contents().find('a[data-nav-type]').eq(typeIndex).trigger('click');
+        // console.log($('iframe').contents().find('a[data-nav-type]').eq(typeIndex).trigger('click'));
+        // $('.main-nav a[data-nav-type]', window.frames['view-pop-iframe'].document).eq(typeIndex).trigger('click');
+        // console.log($('.main-nav a[data-nav-type]', window.frames['view-pop-iframe'].document).eq(typeIndex)[0]);
+        // 靠 封得太死 只能用户自己手动再次点击了。。。。
+        Util.backBlur(null, 500).setUp();
+        // Util.center($('#view-pop'),501,true);
+        $('#view-pop').css({
+            height: 713 || window.top.document.documentElement.clientHeight || window.top.document.document.body.clientHeight,
+            width: window.top.document.documentElement.clientWidth || window.top.document.document.body.clientWidth,
+            display: 'block',
+            position: 'absolute',
+            left: 0,
+            top: document.body.scrollTop || document.documentElement.scrollTop,
+            zIndex: 501
+        });
+        $('#view-pop').undelegate('.close', 'click').delegate('.close', 'click', function (event) {
+            $('#view-pop').css({
+                display: 'none'
+            });
+            Util.backBlur(null).killAll();
+        });
+        ;
+    }
+
+    // 关闭
+    var click2close = function () {
+        $('.main-wrap.assign .form-action button').eq(1).off('click').on('click', function () {
+            event.preventDefault();
+            event.stopPropagation();
+            
+            console.log(this);
+        });
+    }();
+
+});

@@ -1,0 +1,265 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>新建课题预算编制</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<@h.headDetail />
+<@h.layer />
+<link rel="stylesheet" href="${ctx}/css/header.css" type="text/css"/>
+<link rel="stylesheet" href="${ctx}/css/footer.css" type="text/css"/>
+<link href="${ctx}/css/main-newSubject.css" rel="stylesheet">
+<script>
+	var countrySettlement = "${countrySettlement}";//$!{};//单位万元
+	var selfSettlement = "${selfSettlement}";//$!{};//单位万元
+	var taskId = "${id}";//$!{};//课题字段
+	// var ctx="/budgetms";//绝对路径
+</script>
+</head>
+<body>
+	<!-- 迷你导航 -->
+    <div class="mini-nav">
+		<span class="glyphicon glyphicon-chevron-left"></span>
+		<a class="current" href="javascript:void(0);" data-nav-type="assign-budgets">课题预算分配</a>&nbsp;&nbsp;/
+		<!-- <a href="javascript:void(0);">直接费用</a>&nbsp;&nbsp;/
+		<a href="javascript:void(0);">设备费</a>&nbsp;&nbsp;/ -->
+		<a href="javascript:void(0);" data-nav-type="settlement-schedule">已编结算进度</a>
+		<span style="color:red;">*金额已打印输出的为准。若显示不全，鼠标停留在文本上，即可显示全部</span>
+	</div>
+	<!-- 分配 -->
+	<div class="main-wrap assign">
+		<!-- 国拨和自筹总计 -->
+		<div id="assign-total-value" class="intro-title"><i style="color: red; font-style: normal;">及时更新</i> 国拨和自筹合计：<span style="color: red; font-style: oblique;">0</span> (万元)</div>
+		<!-- 国拨分配 -->
+		<div class="country-assign">
+			<div class="intro-title">国拨分配</div>
+			<p class="assign-intro">建议填写步骤：<br>1：填写填写经费支出/总计 和 各单位的经费支出，并使各单位总计之和等于经费支出总计。<br>2：填写购置设备费合计 和 各单位的购置设备费，并使各单位之和等于购置设备费合计。<br>3：根据国拨总计（经费支出/总计） 和 购置设备费 自动计算间接费用（最大值） 和 绩效支出（最大值）并输出。可调整间接费用 和 绩效支出。<br>4：各列的“购置设备费、间接费用、绩效支出”纵向之和小于等于该列的“经费支出/总计”。<br>5：确认无误后，提交。
+			</p>
+			<div class="container">
+				<table class="table table-striped">
+					<thead>
+						<tr class="active">
+							<th title="单位（万元）">单位（万元）</th>
+							<!-- <th>国拨合计</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr title="百分比（%）">
+							<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-star-empty"></span>百分比（%）</td>
+							<!-- <td></td> -->
+						</tr>
+						<tr title="经费支出/总计">
+							<td><span style="color:#3babfa;" class="ui-icon glyphicon glyphicon-folder-open"></span>经费支出/总计</td>
+							<!-- <td><input class="form-control" type="text" placeholder="0.00￥"></td> -->
+						</tr>
+						<tr title="购置设备费">
+							<td><span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>购置设备费</td>
+							<!-- <td><input class="form-control" type="text" placeholder="0.00￥"></td> -->
+						</tr>
+						<tr title="间接费用">
+							<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-close"></span>间接费用</td>
+							<!-- <td><input class="form-control" type="text" placeholder="0.00￥"></td> -->
+						</tr>
+						<tr title="绩效支出">
+							<td><span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>绩效支出</td>
+							<!-- <td><input class="form-control" type="text" placeholder="0.00￥"></td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- 自筹分配 -->
+		<div class="self-assign">
+			<div class="intro-title">自筹分配</div>
+			<p class="assign-intro">
+			建议填写步骤：<br>
+			1：填写经费支出/总计 和 各单位的经费支出，并使各单位总计之和等于经费支出总计。<br>
+			2：填写购置设备费合计 和 各单位的购置设备费，并使各单位之和等于购置设备费合计。<br>
+			3：确认无误后，提交。
+			</p>
+			<div class="container">
+				<table class="table table-striped">
+					<thead>
+						<tr class="active">
+							<th title="单位（万元）">单位（万元）</th>
+							<!-- <th>自筹合计</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr title="百分比（%）">
+							<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-star-empty"></span>百分比（%）</td>
+							<!-- <td></td> -->
+						</tr>
+						<tr title="经费支出/总计">
+							<td><span style="color:#3babfa;" class="ui-icon glyphicon glyphicon-folder-open"></span>经费支出/总计</td>
+							<!-- <td><input class="form-control" type="text" placeholder="0.00￥"></td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- 按钮 -->
+		<div class="form-action">
+			<button type="button" class="btn btn-success">提交</button>
+			<button type="button" class="btn btn-success">关闭</button>
+		</div>
+	</div>
+	<!-- 查看 -->
+	<div class="main-wrap view">
+		<div class="intro-title" title="国拨汇总">国拨汇总</div>
+		<div class="container">
+			<table class="table table-striped">
+				<thead>
+					<tr class="active">
+						<th title="单位（万元）">单位（万元）</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr title="百分比（%）">
+						<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-star-empty"></span>百分比（%）</td>
+					</tr>
+					<tr title="总计">
+						<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-star-empty"></span>总计</td>
+					</tr>
+					<tr title="经费支出">
+						<td><span style="color:#3babfa;" class="ui-icon glyphicon glyphicon-folder-open"></span>经费支出</td>
+					</tr>
+					<tr title="直接经费">
+						<td>&nbsp;<span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-open"></span>直接经费</td>
+					</tr>
+					<tr title="设备费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-folder-open"></span>设备费</td>
+					</tr>
+					<tr title="购置设备费">
+						<td>&nbsp;&nbsp;&nbsp;<span style="color: #3babfa;" class="ui-icon glyphicon glyphicon-list-alt"></span>购置设备费</td>
+					</tr>
+					<tr title="试制设备费">
+						<td>&nbsp;&nbsp;&nbsp;<span style="color: #3babfa;" class="ui-icon glyphicon glyphicon-list-alt"></span>试制设备费</td>
+					</tr>
+					<tr title="设备改造与租赁费">
+						<td>&nbsp;&nbsp;&nbsp;<span style="color: #3babfa;" class="ui-icon glyphicon glyphicon-list-alt"></span>设备改造与租赁费</td>
+					</tr>
+					<tr title="材料费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>材料费</td>
+					</tr>
+					<tr title="测试化验加工费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>测试化验加工费</td>
+					</tr>
+					<tr title="燃料动力费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>燃料动力费</td>
+					</tr>
+					<tr title="差旅费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>差旅费</td>
+					</tr>
+					<tr title="会议费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>会议费</td>
+					</tr>
+					<tr title="国际合作与交流费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>国际合作与交流费</td>
+					</tr>
+					<tr title="出版/……/知识产权">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>出版/……/知识产权</td>
+					</tr>
+					<tr title="劳务费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>劳务费</td>
+					</tr>
+					<tr title="专家咨询费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>专家咨询费</td>
+					</tr>
+					<tr title="其他支出">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>其他支出</td>
+					</tr>
+					<tr title="间接费用">
+						<td>&nbsp;<span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-close"></span>间接费用</td>
+					</tr>
+					<tr title="绩效支出">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>绩效支出</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="intro-title" title="自筹汇总">自筹汇总</div>
+		<div class="container">
+			<table class="table table-striped">
+				<thead>
+					<tr class="active">
+						<th title="单位（万元）">单位（万元）</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr title="百分比（%）">
+						<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-star-empty"></span>百分比（%）</td>
+					</tr>
+					<tr title="总计">
+						<td><span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-star-empty"></span>总计</td>
+					</tr>
+					<tr title="经费支出">
+						<td><span style="color:#3babfa;" class="ui-icon glyphicon glyphicon-folder-open"></span>经费支出</td>
+					</tr>
+					<tr title="直接经费">
+						<td>&nbsp;<span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-open"></span>直接经费</td>
+					</tr>
+					<tr title="设备费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-folder-open"></span>设备费</td>
+					</tr>
+					<tr title="购置设备费">
+						<td>&nbsp;&nbsp;&nbsp;<span style="color: #3babfa;" class="ui-icon glyphicon glyphicon-list-alt"></span>购置设备费</td>
+					</tr>
+					<tr title="试制设备费">
+						<td>&nbsp;&nbsp;&nbsp;<span style="color: #3babfa;" class="ui-icon glyphicon glyphicon-list-alt"></span>试制设备费</td>
+					</tr>
+					<tr title="设备改造与租赁费">
+						<td>&nbsp;&nbsp;&nbsp;<span style="color: #3babfa;" class="ui-icon glyphicon glyphicon-list-alt"></span>设备改造与租赁费</td>
+					</tr>
+					<tr title="材料费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>材料费</td>
+					</tr>
+					<tr title="测试化验加工费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>测试化验加工费</td>
+					</tr>
+					<tr title="燃料动力费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>燃料动力费</td>
+					</tr>
+					<tr title="差旅费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>差旅费</td>
+					</tr>
+					<tr title="会议费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>会议费</td>
+					</tr>
+					<tr title="国际合作与交流费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>国际合作与交流费</td>
+					</tr>
+					<tr title="出版/……/知识产权">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>出版/……/知识产权</td>
+					</tr>
+					<tr title="劳务费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>劳务费</td>
+					</tr>
+					<tr title="专家咨询费">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>专家咨询费</td>
+					</tr>
+					<tr title="其他支出">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>其他支出</td>
+					</tr>
+					<tr title="间接费用">
+						<td>&nbsp;<span style="color: #62be4f;" class="ui-icon glyphicon glyphicon-folder-close"></span>间接费用</td>
+					</tr>
+					<tr title="绩效支出">
+						<td>&nbsp;&nbsp;<span style="color: #ea9f10;" class="ui-icon glyphicon glyphicon-list-alt"></span>绩效支出</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<!-- 课题负责人查看某单位填写的信息弹层 -->
+    <div id="view-pop" class="view-pop">
+    	<span class="glyphicon glyphicon-remove-circle close"></span>
+    	<iframe name="view-pop-iframe" src="${ctx}/task/task/nav2formView" frameborder="0" width="100%" height="100%"></iframe>
+    </div>
+    <script data-main="${ctx}/js/main-newSubject" src="${ctx}/js/require-2.1.11.min.js"></script>
+</body>
+</html>
+</#escape>

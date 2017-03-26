@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": "" 
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "次数,人数,天数,标准(元/人/天),往返交通费(元/人/次),总金额(万元),备注说明",
+            "listValue":[
+                             "次数,人数,天数,标准（元/人/天）,往返交通费（元/人/次）,总金额,备注说明",
+                             "次数,人数,天数,标准（元/人/天）,往返交通费（元/人/次）,总金额,备注说明"
+                        ]
+            },
+        "description":{
+            "title_desc": "差旅费的开支范围",
+            "description": "在课题研究开发过程中开展科学实验（试验）、科学考察、业务调研、学术交流等发生的外埠差略费、市内交通费等。差旅费的开支标准应当按照国家有关规定执行。",
+            "title_list": "差旅费的相关要求",
+            "list": "课题任务中有相关任务的,避免人数多、超标准、长时间的出差"
+        }
+        },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

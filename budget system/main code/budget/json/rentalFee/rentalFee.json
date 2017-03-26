@@ -1,0 +1,80 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+        {
+            "title": "测算说明",
+            "content": "",
+            "placeholder": "" 
+        },
+        {
+            "title": "详细测算",
+            "unit": "万元",
+            "list": ["设备名称","改造/租赁费"],
+            "listValue":[]
+        },
+        {
+            "title_desc": "设备费的开支范围",
+            "description": "在课题研究开发过程中购置或试制专用仪器设备，对现有仪器设备进行升级改造，以及租赁外单位仪器设备而发生的费用。专项经费要严格控制设备购置费支出。",
+            "title_list": "设备费的相关要求",
+            "list": ["只增添必要的专用仪器设备；考虑共享或租赁","购置设备要考虑性价比","购置（试制）单台套超过100万元需要论证","专项经费不得列入基建设备和生产性设备","专项经费不应列入实验室常规通用和办公设备","专项经费不应列支办公室、实验室的维修改造费","购置、试制、改造租赁费之间避免重复列支","相关备品备件如何列支","试制设备费用避免与材料、加工和劳务等重复列支","单台套10万元以上设备需提供报价单","设备租赁费如何界定","关于计算机购买"]
+        }
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": ""
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "设备名称,改造/租赁费",
+            "listValue":[
+                            "设备名称,改造/租赁费",
+                            "设备名称,改造/租赁费"
+                        ]
+            },
+        "description":{
+            "title_desc": "设备费的开支范围",
+            "description": "在课题研究开发过程中购置或试制专用仪器设备，对现有仪器设备进行升级改造，以及租赁外单位仪器设备而发生的费用。专项经费要严格控制设备购置费支出。",
+            "title_list": "设备费的相关要求",
+            "list": "只增添必要的专用仪器设备；考虑共享或租赁,购置设备要考虑性价比,购置（试制）单台套超过100万元需要论证,专项经费不得列入基建设备和生产性设备,专项经费不应列入实验室常规通用和办公设备,专项经费不应列支办公室、实验室的维修改造费,购置、试制、改造租赁费之间避免重复列支,相关备品备件如何列支,试制设备费用避免与材料、加工和劳务等重复列支,单台套10万元以上设备需提供报价单,设备租赁费如何界定,关于计算机购买"
+        }
+        },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

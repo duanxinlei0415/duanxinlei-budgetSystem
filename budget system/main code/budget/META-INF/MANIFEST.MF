@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Implementation-Title: budgetms Maven Webapp
+Implementation-Version: 0.0.1-SNAPSHOT
+Implementation-Vendor-Id: com.wyt
+Built-By: wanyongtao
+Build-Jdk: 1.7.0_25
+Build-Version: 0.0.1-SNAPSHOT-20160521-1946
+Specification-Title: budgetms Maven Webapp
+Created-By: Apache Maven 3.1.0
+Specification-Version: 0.0.1-SNAPSHOT
+Archiver-Version: Plexus Archiver
+

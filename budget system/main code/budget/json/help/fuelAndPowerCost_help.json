@@ -1,0 +1,10 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [],
+    "map": {
+        "infor":"fwinwifwoeifeowfnwoefnoenowiegneorrg",
+        "images":["../images/test01.jpg","../images/test01.jpg"]
+    }
+}

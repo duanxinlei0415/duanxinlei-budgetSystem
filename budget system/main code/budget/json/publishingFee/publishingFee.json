@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": "" 
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "项目,单价(元),数量,总金额(万元),备注说明",
+            "listValue":[
+                            "1,单价,数量,总金额,备注说明",
+                            "2,单价,数量,总金额,备注说明"
+                        ]
+            },
+        "description":{
+            "title_desc": "出版/文献/信息传播/知识产权事务费",
+            "description": "在课题研究开发过程中需要支付的出版费、资料费、专用软件购买费、文献检索费、专业通信费、专利申请及其他知识产权事务等费用。",
+            "title_list": "出版/文献/信息传播/知识产权事务费的相关要求",
+            "list": "注意高价格、大宗的、专业资料、软件、日常的电话费、资料费、软件费等。"
+        }
+    },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

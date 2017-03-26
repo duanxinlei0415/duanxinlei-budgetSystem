@@ -1,0 +1,66 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>21世纪-预算管理</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <@h.head />
+    <@h.layer />
+    <@h.validate/>
+    <style type="text/css" media="screen">
+	html,
+	html body{width: 100%;height:100%; max-height: 100%; max-width: 100%;}
+	body{background: #e9edf0;margin: 0 auto; text-align: center;}
+	html{font-size: 12px;}
+    .main{max-width: 1000px;margin:0 auto;}
+    table caption{text-align: center; position: relative;}
+	::-webkit-input-placeholder,
+	::-moz-placeholder,
+	:-ms-input-placeholder,
+	table td>input{width:280px;}
+	table td>span{display: inline; width: 160px; text-align: right; float: left;}
+	table td>span.requrie:before{content:'*';color: red; font-size: 16px; vertical-align: middle;}
+	table td>textarea{resize:none; width: 800px; height: 200px; border: .0625em solid #ccc; max-width: 800px;border-radius: .25em; padding: .375
+		              em .75em;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;
+    }
+	.form-action{ text-align: center; max-width: 650px;margin:0 auto;}
+	.btn-success {color: #fff;background-color: #337ab7;border-color: #4cae4c;}
+    .btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;line-height: 1.42857143;font-weight: 400;text-align: center;
+    	  white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-
+    	  select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;
+    	  border-radius: 4px;
+    }
+	</style>
+	<script type="text/javascript" src="${ctx}/js/common.js"></script>
+	<script type="text/javascript" src="${ctx}/js/task/subTask/subTaskInvite.js"></script>
+  </head>
+
+  <body>
+	<!-- 主体 -->
+	<div class="main">
+			<form id="updateForm" name="updateForm" action="${ctx}/task/subTask/subTaskInvite" method="post">
+			<input type="hidden" name="id" id="id" value="${(id)!''}"/>
+			<table class="table table-striped">
+				<caption>填写邀请码</caption>
+				<tbody>
+					<tr>
+					    <td>
+					    	<input type="text" id="invitiCode" name="invitiCode" style="width:380px;" class="form-control" type="text" placeholder="邀请码">
+					    </td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="form-action">
+				<!-- 提交 -->
+				<input type="button" class="btn btn-success" id="subBtn" value="保存">&nbsp;&nbsp;&nbsp;&nbsp;
+				<input type="button" class="btn btn-success" id="closeBtn" value="返回">
+			</div>
+			</form>
+		</div>
+  </body>
+</html>
+</#escape>

@@ -1,0 +1,114 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>首页</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<@h.head />
+<@h.layer />
+<@h.bsGrid />
+<style>
+    .ms-controller{
+        visibility: hidden;
+    }
+    .ui-no-height{
+    	height:0;overflow:hidden;
+    }
+    .ui-holy{
+    	padding-left: 0px;
+    }
+    .main .main-content{
+    	max-width: 100%; width: 900px; margin: 20px auto; overflow: hidden; 
+    }
+    #tmenub {
+    	line-height: 28px;
+    	display: block;
+    	padding: 10px 20px 0px 20px;
+    	border-bottom: 1px solid #348EE0;
+    	margin-bottom: 10px;
+	}
+	#tmenub a.tb:link, #tmenub a.tb:visited {
+	    background-color: #4b9aeb;
+	    color: #eee;
+	    font-weight: bold;
+	    border-color: #348EE0;
+	}
+	#tmenub a:link, #tmenub a:visited {
+	    background-color: #f7f7f7;
+	    color: #333333;
+	    border: 1px solid;
+	    border-bottom: 0px;
+	    border-color: #79B9F6;
+	}
+	#tmenub a {
+	    float: left;
+	    margin: 0px 1px 0px 0px;
+	    line-height: 28px;
+	    text-align: center;
+	    text-decoration: none;
+	    padding: 0px 25px;
+	}
+	a:visited {
+	    font-size: 15px;
+	    color: #666666;
+	}
+	a:link {
+	    font-size: 15px;
+	    color: #666666;
+	}
+	.table{
+		
+	}
+	input[type="button"]{
+		margin: 0 5px; display: inline-block; 
+	}
+	input[type="search"]{
+		width: 140px; 
+	}
+	.main .main-content table{margin: 10px auto; font-size: 16px; max-width: 100%; width: 880px; padding: 0 10px; }
+	.main .main-content table tr{}
+	.main .main-content table td{line-height: 2; padding: 10px 0; }
+	.main .main-content table td > input[type="button"]{margin-top: 5px;  }
+	.main .main-content .add{display: inline-block; font-size: 18px; margin-left: 800px; }
+	.main .main-content .tab{max-width: 100%;height: 200px; border: 2px solid blue; margin: 5px 0 20px; }
+	.main .main-content .del{display: inline-block; font-size: 18px; margin-left: 720px; }
+</style>
+<script type="text/javascript" src="${ctx}/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/js/system/user/userList.js"></script>
+</head>
+<body>
+	<@h.header />
+	<!-- 主体 -->
+	<div class="main ui-holy">
+		<!-- 详情 -->
+		<div class="ui-holy-main">
+			<div class="main-content">
+				<!-- 迷你导航 -->
+				<table id="xiangmu" class="table table-striped">
+					<tr>
+						<td>用户名称：</td>
+						<td><input class="form-control" type="search" placeholder="请输入用户名称"></td>
+						<td colspan="2"><input id="searchBtn" type="button" value="查询"></td>
+					</tr>
+				</table>
+				<table id="searchTable">
+					    <tr>
+					        <th w_num="line" width="5%;">序号</th>
+					        <th w_check="true" w_index="ID" width="5%;"></th>
+					        <th w_index="ID" w_hidden="true" width="5%;">ID</th>
+					        <th w_index="account" w_align="left" width="30%;">用户名称</th>
+					        <th w_index="email" w_align="center" width="15%;">用户邮箱</th>
+					        <th w_index="state" w_align="left" width="30%;">状态</th>
+					        <th w_render="operate" width="20%;">修改密码</th>
+					    </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+	<@h.footer />
+</body>
+</html>
+</#escape>

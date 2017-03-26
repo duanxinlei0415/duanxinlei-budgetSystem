@@ -1,0 +1,255 @@
+@charset "UTF-8";
+
+.bsgrid {
+	font-size:12px;
+	font-family: "Segoe UI", "Lucida Grande", Helvetica, Arial, "Microsoft YaHei", FreeSans, Arimo, "Droid Sans","wenquanyi micro hei","Hiragino Sans GB", "Hiragino Sans GB W3", Arial, sans-serif;
+}
+table.bsgrid {
+	/*width:98%;*/
+	/*margin-right:5px;*/
+	/*border-collapse:collapse*/
+}
+table.bsgrid caption{
+	text-align: center;
+	min-height: 40px;
+    line-height: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+	background-color: #fafafa;
+    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    -moz-border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+}
+
+.bsgrid th,.bsgrid td {
+	/*padding:3px;*/
+	/*border:solid 1px #ccc;*/
+	background-color:white;
+	/*text-align:center;*/
+	/*color:#333;*/
+	/*line-height:1.8em*/
+}
+.bsgrid td.lineWrap {
+	word-break:break-all
+}
+.bsgrid td.lineNoWrap {
+	white-space:nowrap;
+	overflow:hidden;
+	text-overflow:ellipsis
+}
+.bsgrid th {
+	/*font-weight:400;*/
+	/*background:url(../images/skins/default/bg.gif) repeat-x #f4f4f4*/
+}
+.bsgrid tr.even_index_row td {
+	background-color:#eef
+}
+.bsgrid tr.row_hover td {
+	background-color:#fff1cc!important
+}
+.bsgrid tr.selected.selected_color td {
+	background-color:#fff1cc!important
+}
+.bsgrid a {
+	color:#f60;
+	text-decoration:none
+}
+.bsgrid th .sort.sort-view {
+	background:url(../images/sort-view.gif) no-repeat center;
+	margin-left:3px
+}
+.bsgrid th .sort.sort-asc {
+	background:url(../images/sort-asc.gif) no-repeat top;
+	margin-left:3px
+}
+.bsgrid th .sort.sort-desc {
+	background:url(../images/sort-desc.gif) no-repeat bottom;
+	margin-left:3px
+}
+.bsgrid.lockscreen {
+	position:fixed;
+	z-index:2014;
+	display:none;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%;
+	background:#000;
+	filter:alpha(opacity=10);
+	opacity:.1;
+	-moz-opacity:.1
+}
+.bsgrid.loading_div {
+	position:fixed;
+	z-index:2015;
+	display:none;
+	left:0;
+	top:0;
+	width:100%;
+	height:100%
+}
+.bsgrid.loading_div table {
+	width:100%;
+	height:100%
+}
+.bsgrid.loading_div td {
+	width:100%;
+	height:100%;
+	background-color:transparent!important;
+	text-align:center;
+	vertical-align:middle
+}
+.bsgrid.loading_div td div {
+	width:200px;
+	padding-top:8px;
+	padding-bottom:8px;
+	color:#000;
+	border:solid 1px #999;
+	background-color:#fff
+}
+.bsgrid.loading {
+	padding-left:5px;
+	line-height:1.5em
+}
+.bsgrid.loading span {
+	background:url("../images/loading.gif") no-repeat center
+}
+.bsgridPagingOutTab {
+	width:98%;
+	margin-right:5px;
+	border-collapse:collapse;
+	border:solid 1px #ccc;
+	background-color:white;
+	border-top-width:0
+}
+.bsgridPaging {
+	font-size:12px;
+	width:770px;
+	border-collapse:collapse
+}
+.gotoPageInputTd input{
+	display: line-block;
+    padding: .375em .75em;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: .0625em solid #ccc;
+    border-radius: .25em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.bsgridPaging.pagingLittleToolbar {
+	width:550px
+}
+.bsgridPaging.noPageSizeSelect {
+	width:650px
+}
+.bsgridPaging.pagingLittleToolbar.pagingLittleToolbar {
+	width:430px
+}
+.bsgridPaging td {
+	text-align:center
+}
+.bsgridPaging select {
+	display: line-block;
+    padding: .375em .75em;
+    font-size: 1em;
+    line-height: 1.5;
+    color: #55595c;
+    background-color: #fff;
+    background-image: none;
+    border: .0625em solid #ccc;
+    border-radius: .25em;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.bsgridPaging .pagingBtn {
+	display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn {
+	width:16px;
+	border-width:0;
+	background:transparent no-repeat;
+	padding:0;
+	margin:3px
+}
+.bsgridPaging .pagingBtn.disabledCls {
+	color:#999;
+	filter:alpha(opacity=50);
+	opacity:.5;
+	-moz-opacity:.5
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn.firstPage {
+	background-image:url(../images/icons/paging/go-first-view.png)
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn.prevPage {
+	background-image:url(../images/icons/paging/go-previous-view.png)
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn.nextPage {
+	background-image:url(../images/icons/paging/go-next-view.png)
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn.lastPage {
+	background-image:url(../images/icons/paging/go-last-view.png)
+}
+.bsgridPaging .gotoPageInputTd {
+	width:44px
+}
+.bsgridPaging .gotoPageInput {
+	width:40px;
+	height:auto;
+	font-size:inherit;
+	line-height:1em;
+	color:inherit;
+	border:solid 1px #ccc;
+	padding:1px;
+	margin:1px
+}
+.bsgridPaging .gotoPageButtonTd {
+	text-align:left
+}
+.bsgridPaging .refreshPageTd {
+	text-align:right;
+	padding-right:4px
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn.gotoPage {
+	background-image:url(../images/icons/paging/go-jump-2.png)
+}
+.bsgridPaging.pagingLittleToolbar .pagingBtn.refreshPage {
+	background-image:url(../images/icons/paging/view-refresh-3.png)
+}

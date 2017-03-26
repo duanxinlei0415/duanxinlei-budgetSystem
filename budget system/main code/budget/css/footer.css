@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+.ui-footer{
+	padding: 20px 0 10px; background: #555; color: #999;
+}
+.ui-footer .ui-container{
+	font-size: 14px; margin: 10px auto; overflow: hidden;
+}
+.ui-footer .ui-container h2 a{display: block; width: 60px; height: 60px; font-size: 60px;
+	-webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: all 1.3s ease-in;
+    color: #0f9ae0;
+}
+.ui-footer .ui-container h2 a:hover{
+	-webkit-transform: rotate(720deg);
+    -ms-transform: rotate(720deg);
+    transform: rotate(720deg);
+    -webkit-transition: all 1.3s ease-in;
+    transition: all 1.3s ease-in;
+    color: #dd514c;
+}
+.ui-footer .ui-container p{margin:10px 0;}
+
+@media only screen and (min-width: 641px) {
+	.ui-footer {
+	        padding: 30px 0 15px;
+	        font-size: 22px;
+	    }
+}

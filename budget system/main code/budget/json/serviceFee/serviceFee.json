@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": "" 
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "没有工资性收入人员,人数(人),时间(月/人),报酬标准（元/月）,费用合计(万元),备注说明",
+            "listValue":[
+                           "没有工资性收入人员,人数,时间/人,报酬标准（元/月）,费用合计,说明",
+                            "没有工资性收入人员,人数,时间/人,报酬标准（元/月）,费用合计,说明"
+                        ]
+            },
+        "description":{
+            "title_desc": "劳务费",
+            "description": "为组织开展学术研讨、咨询以及协调项目或课题等活动而发生的会议费用。课题承担单位应当按照国家有关规定，严格控制会议规模、数量、开支标准和会期。",
+            "title_list": "劳务费的相关要求",
+            "list": "有工资性收入的课题组成员不应列支,固定人员与临时人员结构应合理,课题参加人员基本情况表与课题任务中人员信息应一致,研究人员累计全是不得超过课题的执行期,付给个人，不得打包付给单位,劳务费预算应当结合当地实际以及相关人员参与项目的全时工作时间等因素合理编制,临时聘用人员的社会保险补助可纳入劳务费科目中列支"
+        }
+    },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

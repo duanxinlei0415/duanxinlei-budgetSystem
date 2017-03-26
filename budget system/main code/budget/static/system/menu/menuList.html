@@ -1,0 +1,137 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>21世纪-预算管理</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <@h.head />
+    <@h.layer />
+    <@h.zTree />
+    <style>
+		.main{overflow: hidden; background-color: #eee; }
+		.main .nav-left{width: 350px; float: left; height: 501px; margin: 10px 20px; 
+		background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+	    background-repeat: repeat-x;
+	    border: 2px solid #d4d4d4;
+	        box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+	        background-color: #fafafa;
+	        overflow: auto; 
+	        overflow-x: hidden;
+		}
+		.main .nav-left > p{width: 100%; text-align: center; font-size: 24px; padding: 10px 0; border: 1px solid #d4d4d4; }
+	
+		/*表单结构*/
+		.mini-nav{width: 800px; margin: 20px auto; }
+		.main-content > textarea{width: 700px; /*height: 60px;*/ padding: 30px 50px; overflow: hidden; margin: 0 0 30px; }
+		.glyphicon-chevron-left:before{}
+		.main .mini-nav{padding: 2em 0em 1em 0em; margin: 0 0em 2em 0em;
+		    background-color: #fafafa;
+		    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+		    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+		    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+		    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+		    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+		    background-repeat: repeat-x;
+		    border: 1px solid #d4d4d4;
+		    -webkit-border-radius: 4px;
+		    -moz-border-radius: 4px;
+		    border-radius: 4px;
+		    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+		    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+		    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+		    box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+		    font-size: 20px; 
+			}
+	
+		.mini-nav a{color:#0e90d2;}
+		.mini-nav .current{color: #000;}
+		.main .main-content{min-width:500px; max-width: 800px; margin:20px 0; margin-right: 90px; padding-right: 10px; width: 100%; float: right;}
+	
+		.main-content table{}
+		.main-content table caption{text-align: left; color: red; }
+		.main-content table tr >td:first-child > a{color: red; }
+		.main-content table tfoot td{color: red; border-top: 0; }
+	</style>
+	<script type="text/javascript" src="${ctx}/js/common.js"></script>
+	<script type="text/javascript" src="${ctx}/js/system/menu/menuList.js"></script>
+  </head>
+
+  <body>
+  	<@h.header />
+  <div class="main">
+  	<!-- 主体 -->
+	<!-- 左侧树状结构 -->
+	<div class="nav-left">
+		<p>资源列表</p>
+		<ul id="menuListTree" class="ztree"></ul>
+	</div>
+	<div class="main-content">
+		<!-- 迷你导航 -->
+		<div class="mini-nav">
+			<span class="glyphicon glyphicon-chevron-left"></span>
+			<a class="current" href="javascript:void(0);">资源修改</a>
+		</div>
+		<p class="ui-paragrah">
+		<!-- 欢迎来到21世纪-新建项目 -->
+		</p>
+		<form id="updateForm" name="updateForm"  action="${ctx}/system/menu/update"   method="post" >
+		<table style="max-width:800px; margin:0 auto 2em;" class="table table-striped">
+			<input type="hidden" name="id" id="id"/>
+			<caption>21世纪-资源修改</caption>
+			<tbody>
+				<tr>
+					<td style="text-align: right;">名称：</td>
+					<td style="text-align: left;"><input id="name" name="name" type="text" placeholder="请输入资源名称"></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">地址：</td>
+					<td style="text-align: left;"><input id="pageurl" name="pageurl" type="text" placeholder="请输入资源地址"></td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">父节点：</td>
+					<td style="text-align: left;">
+						<input name="pname" id="pname" type="text" readonly="readonly">
+						<input name="pid"  id="pid" type="hidden" />
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">资源类型：</td>
+					<td style="text-align: left;">
+						<select name="type" id="type">
+							<option value="1">导航菜单</option>
+							<option value="0">按钮资源</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">排序：</td>
+					<td style="text-align: left;">
+						<input type="text" id="sort" name="sort" placeholder="请输入排序">
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: right;">是否可用：</td>
+					<td style="text-align: left;">
+						<select  name="state" id="state" >
+							<option  value="是">是</option>
+							<option value="否">否</option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td style="text-align: right;"><input id="subBtn" type="button" value="提交"></td>
+					<td style="text-align: center;"><input id="delBtn" type="button" value="删除"></td>
+				</tr>
+			</tbody>
+		</table>
+		</form>
+	</div>
+ </div>
+  	<@h.footer />
+  </body>
+</html>
+</#escape>

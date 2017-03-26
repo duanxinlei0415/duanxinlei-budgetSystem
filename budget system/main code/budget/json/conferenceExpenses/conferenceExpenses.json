@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": "" 
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "会议名称,次数,天数,人数,标准(元/人/天),总金额(万元),备注说明(拟聘专家人数)",
+            "listValue":[
+                            "北京科技大学,1,1,5,1000,5000,拟聘专家人数50人",
+                            "北京理工大学,12,21,10,100,10000,拟聘专家人数5人"
+                        ]
+            },
+        "description":{
+            "title_desc": "会议费的开支范围",
+            "description": "为组织开展学术研讨、咨询以及协调项目或课题等活动而发生的会议费用。课题承担单位应当按照国家有关规定，严格控制会议规模、数量、开支标准和会期。",
+            "title_list": "会议费的相关要求",
+            "list": "与课题任务有关的会议,控制会议规模、数量、开支标准和会期,注意学术性会议的数量,本单位承办的各种例会、年会慎列"
+        }
+        },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

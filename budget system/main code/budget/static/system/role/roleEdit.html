@@ -1,0 +1,133 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>首页</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<@h.head />
+<@h.zTree />
+<@h.layer />
+<style type="text/css" media="screen">
+    .ms-controller{
+        visibility: hidden;
+    }
+    .ui-no-height{
+    	height:0;overflow:hidden;
+    }
+    .ui-holy{
+    	padding-left: 0px;
+    }
+    .main .main-content{
+    	max-width: 100%; width: 900px; margin: 20px auto; overflow: hidden; 
+    }
+    #tmenub {
+    	line-height: 28px;
+    	display: block;
+    	padding: 10px 20px 0px 20px;
+    	border-bottom: 1px solid #348EE0;
+    	margin-bottom: 10px;
+	}
+	#tmenub a.tb:link, #tmenub a.tb:visited {
+	    background-color: #4b9aeb;
+	    color: #eee;
+	    font-weight: bold;
+	    border-color: #348EE0;
+	}
+	#tmenub a:link, #tmenub a:visited {
+	    background-color: #f7f7f7;
+	    color: #333333;
+	    border: 1px solid;
+	    border-bottom: 0px;
+	    border-color: #79B9F6;
+	}
+	#tmenub a {
+	    float: left;
+	    margin: 0px 1px 0px 0px;
+	    line-height: 28px;
+	    text-align: center;
+	    text-decoration: none;
+	    padding: 0px 25px;
+	}
+	a:visited {
+	    font-size: 15px;
+	    color: #666666;
+	}
+	a:link {
+	    font-size: 15px;
+	    color: #666666;
+	}
+	.table{
+		
+	}
+	input[type="button"]{
+		margin: 0 5px; display: inline-block; 
+	}
+	input[type="search"]{
+		width: 140px; 
+	}
+	.main .main-content table{margin: 10px auto; font-size: 16px; max-width: 100%; width: 880px; padding: 0 10px; }
+	.main .main-content table tr{}
+	.main .main-content table td{line-height: 2; padding: 10px 0; }
+	.main .main-content table td > input[type="button"]{margin-top: 5px;  }
+	.main .main-content .add{display: inline-block; font-size: 18px; margin-left: 800px; }
+	.main .main-content .tab{max-width: 100%;height: 200px; border: 2px solid blue; margin: 5px 0 20px; }
+	.main .main-content .del{display: inline-block; font-size: 18px; margin-left: 720px; }
+</style>
+<script type="text/javascript" src="${ctx}/js/system/role/roleEdit.js"></script>
+</head>
+    <body>
+		<!-- 主体 -->
+		<div class="ui-holy-main">
+			<div class="content">
+				<form id="updateForm" name="updateForm" action="${ctx}/system/role/update" method="post" >
+				<input type="hidden" name="id" id="id" value="${(id)!''}"/>
+				<input type="hidden" name="menuIds" id="menuIds"/>
+				<table id="juesexiugai" class="table table-striped" style="max-width:450px; margin:0 auto; padding-right: 10px;">
+					<caption>角色修改</caption>
+					<tbody>
+					  <tr>
+					  	<td style="text-align: right;"></td>
+					  	<td style="text-align: left; padding-left: 1px">角色信息 注：带*的为必填项</td>
+					  </tr>
+					  <tr>
+					    <td style="text-align: right;">名称：</td>
+					  	<td style="text-align: left;"><input type="text" id="name" name="name"></td>
+					  </tr>
+					  <tr>
+					    <td style="text-align: right;">是否可用：</td>
+					  	<td style="text-align: left;">
+					  		<select  name="state" id="state" style="width:210px">
+								<option  value="是">是</option>
+								<option value="否">否</option>
+							</select>
+					  	</td>
+					  </tr>
+					  <tr>
+					    <td style="text-align: right;">权限：</td>
+					  	<td style="text-align: left;">
+					  		<div style="width:70%; min-height:200px; border:1px solid black">
+					  			<ul id="menuShowTree" class="ztree"></ul>
+					  		</div>
+					  	</td>
+					  </tr>
+					  <tr>
+					     <td style="text-align: right; margin-right: -30px">
+					     	<input type="button" id="saveBtn" value="保存">
+					     </td>
+					     <td style="text-align: left;">
+					     	<div style="display: inline; margin-left: 80px;">
+					     		<input type="button" id="closeBtn" value="关闭">
+					     	</div>
+					     </td>  
+					  </tr>
+					</tbody>
+				</table>
+				</form>
+			</div>
+		</div>	
+    </body>
+</html>
+</#escape>

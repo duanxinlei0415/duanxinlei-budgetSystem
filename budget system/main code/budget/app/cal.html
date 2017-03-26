@@ -1,0 +1,66 @@
+<!DOCTYPE html>     
+<html>     
+<head>     
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>锐创动力-预算系统</title>     
+<meta name="viewport" content="width=device-width, initial-scale=1">     
+<link rel="stylesheet" href="jquery.mobile.min.css" />     
+<script src="jquery-1.7.1.min.js"></script>     
+<script src="jquery.mobile.min.js"></script>
+<script type="text/javascript">
+	// 根据国拨总计 和 购置设备费 计算间接费用（最大值） 和 绩效支出（最大值）
+	function calculate(value1, value2){
+		var tmp = 0;
+		if (value1-value2 >= 1165) {
+			tmp = ((value1-value2-1000)*0.1+165)/1.1;
+		}else if(value1-value2 < 1165 && value1-value2 >= 600){
+			tmp = ((value1-value2-500)*0.13+100)/1.13;
+		}else if (value1-value2 < 600) {
+			tmp = ((value1-value2)*0.2)/1.2;
+		};
+		var outArray = [];
+		outArray.push(tmp.toFixed(2));
+		outArray.push((tmp*0.05).toFixed(2));
+		return outArray;
+	}
+	$(function(){
+		$('#cal').click(function(){
+			var appropriationExpenditure = $('#appropriationExpenditure').val();
+			var equipmentPurchasePost = $('#equipmentPurchasePost').val();
+			var array = calculate(appropriationExpenditure,equipmentPurchasePost);
+			$('#indirectExpenditure').val(array[0]);
+			$('#jixiao').val(array[1]);
+		});
+
+		$('#clear').click(function(){
+			$('#appropriationExpenditure').val('');
+			$('#equipmentPurchasePost').val('');
+			$('#indirectExpenditure').val('');
+			$('#jixiao').val('');
+		});
+		
+	})
+</script>
+</head>               
+<body>
+	<div data-role="page">
+		<div data-role="header">
+			<h1>间接费用计算</h1>
+		</div>
+		<div data-role="content">
+			<form action="#" method="post">
+				<!-- placeholder属性的内容会在编辑框内以灰色显示-->
+				<input type="text" name="appropriationExpenditure" id="appropriationExpenditure" placeholder="请输入你的经费支出(万元)："/>
+				<!--可以单击右侧的按钮将其中的内容清空-->
+				<input type="text" name="equipmentPurchasePost" id="equipmentPurchasePost" data-clear-btn="true" placeholder="请输入你的购置设备费(万元)：">
+				<label for="indirectExpenditure">间接费用（最大值）</label>
+				<input type="text" name="indirectExpenditure" id="indirectExpenditure" data-clear-btn="true" placeholder="单位万元">
+				<label for="where">绩效支出（最大值）</label>
+				<input type="text" name="jixiao" id="jixiao" data-clear-btn="true" placeholder="单位万元">
+				<a href="#" data-role="button" id="cal">计算</a>
+				<a href="#" data-role="button" id="clear">清空</a>
+			</form>
+		</div>
+    </div>
+</body>
+</html> 

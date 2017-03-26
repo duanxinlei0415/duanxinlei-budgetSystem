@@ -1,0 +1,150 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>新建课题</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<@h.headDetail />
+<link rel="stylesheet" href="${ctx}/css/common.css" type="text/css"/>
+<link rel="stylesheet" href="${ctx}/css/index.css" type="text/css"/>
+<style type="text/css">
+	html,
+	html body{width: 100%;height:100%; max-height: 100%; max-width: 100%;}
+	body{background: #e9edf0;margin: 0 auto; text-align: center;}
+	html{font-size: 12px;}
+    .main{max-width: 1000px;margin:0 auto;}
+    table caption{text-align: center; position: relative;}
+	::-webkit-input-placeholder,
+	::-moz-placeholder,
+	:-ms-input-placeholder,
+	table td>input{width:280px;}
+	table td>span{display: inline; width: 160px; text-align: right; float: left;}
+	table td>span.requrie:before{content:'*';color: red; font-size: 16px; vertical-align: middle;}
+	table td>textarea{resize:none; width: 800px; height: 200px; border: .0625em solid #ccc; max-width: 800px;border-radius: .25em; padding: .375
+		              em .75em;-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;
+    }
+    .btn-success {color: #fff;background-color: #337ab7;border-color: #4cae4c;}
+    .btn {display: inline-block;padding: 6px 12px;margin-bottom: 0;font-size: 14px;line-height: 1.42857143;font-weight: 400;text-align: center;
+    	  white-space: nowrap;vertical-align: middle;-ms-touch-action: manipulation;touch-action: manipulation;cursor: pointer;-webkit-user-
+    	  select: none;-moz-user-select: none;-ms-user-select: none;user-select: none;background-image: none;border: 1px solid transparent;
+    	  border-radius: 4px;
+    }
+    .main h3{background: #fff; line-height: 60px;}
+	/*tab页按钮*/
+	.nav-tab{overflow: hidden; width: 450px; margin-top: 30px;}
+	.nav-tmeunb{margin:0 auto; max-width: 100%; width: 907px; position: relative;}
+	.nav-tmeunb .arrow1{border-left: 8px solid #f7f7f9; border-top: 8px solid transparent; border-bottom: 8px solid transparent; width: 0; 
+		                height: 0; position: absolute; top:12.5px; left: 14px; z-index: 3px;}
+	.nav-tmeunb .arrow11{border-left: 8px solid #337ab7; border-top: 8px solid transparent; border-bottom: 8px solid transparent; width: 0; 
+		                 height: 0; position: absolute; top:12.5px; left: 11.5px; z-index: 3px;}
+    .nav-tmeunb .arrow2{border-left: 8px solid #337ab7; border-top: 8px solid transparent; border-bottom: 8px solid transparent; width: 0; 
+    	                height: 0; position: absolute; top:12.5px; left: 161px; z-index: 3px;}
+    .nav-tmeunb .arrow22{border-left: 8px solid #f7f7f9; border-top: 8px solid transparent; border-bottom: 8px solid transparent; width: 0; 
+		                 height: 0; position: absolute; top:12.5px; left: 158px; z-index: 3px;}
+	.nav-tmeunb .arrow3{border-left: 8px solid #337ab7; border-top: 8px solid transparent; border-bottom: 8px solid transparent; width: 0; 
+    	                height: 0; position: absolute; top:12.5px; left: 306px; z-index: 3px;}
+    .nav-tmeunb .arrow33{border-left: 8px solid #f7f7f9; border-top: 8px solid transparent; border-bottom: 8px solid transparent; width: 0; 
+		                 height: 0; position: absolute; top:12.5px; left: 303.5px; z-index: 3px;}
+    .nav-tab li a:hover > .arrow2{border-left: 8px solid #f7f7f9}
+    .nav-tab li a:hover > .arrow22{border-left: 8px solid #337ab7}
+    .nav-tab li a:hover > .arrow3{border-left: 8px solid #f7f7f9}
+    .nav-tab li a:hover > .arrow33{border-left: 8px solid #337ab7} 
+	.nav-tab li{float: left;}
+	.nav-tab li a{
+		display: block; color: #337ab7;
+	    background-color: #f7f7f9;
+	    border-radius: 4px;
+	    padding: 10px 15px;
+	    text-decoration: none;
+	    font-size: 14px;
+	    line-height: 1.42857143;
+	    width: 113px;
+	    text-align: center;
+	    margin-right: 2px;
+		}
+	.nav-tab li a:hover{background-color: #337ab7; color:#fff;}
+	.nav-tab .current > a{background-color: #337ab7; color: #fff;}
+	.form-action{ text-align: center; max-width: 650px;margin:0 auto;}
+</style>
+<@h.layer />
+<@h.select/>
+<@h.validate/>
+<script type="text/javascript" src="${ctx}/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/json/subjectType/subjectType.js"></script>
+<script type="text/javascript" src="${ctx}/js/task/task/editSummy.js"></script>
+</head>
+<body>
+	<!-- 主体 -->
+	<div class="main">
+		<!-- tab页按钮 -->
+		<div class="nav-tmeunb">  
+			<ul class="nav-tab">
+				<li class="current"><a href="javascript:void(0);">牵头课题信息<div class="arrow1"></div><div class="arrow11"></div></a></li>
+				<li><a href="javascript:void(0);">管理参与单位<div class="arrow2"></div><div class="arrow22"></div></a></li>
+				<li><a href="javascript:void(0);">课题预算分配<div class="arrow3"></div><div class="arrow33"></div></a></li>
+			</ul>
+		</div>
+		<h3>新建牵头课题信息</h3>
+		<form id="updateForm" name="updateForm" action="${ctx}/task/task/update" method="post">
+		<input type="hidden" name="id" id="id" value="${(id)!''}"/>
+		<table class="table table-striped">
+			<caption>注：带*的为必填内容</caption>
+			<tbody>
+				<tr>
+					<td>
+						<span class="requrie">牵头课题名称：</span>
+						<input id="taskName" style="width:280px;" class="form-control" name="taskName" type="text" placeholder="课题名称">
+					</td>
+					<td>
+						<span class="requrie">牵头课题编号：</span>
+						<input id="taskCode" style="width:280px;" class="form-control" name="taskCode" type="text" placeholder="课题编号">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="requrie">课题负责人：</span>
+						<input type="text" style="width:280px;" class="form-control" id="responsePerson" name="responsePerson" placeholder="课题负责人">
+					</td>
+						
+					<td>
+						<span class="requrie">课题负责人单位：</span>
+						<input type="text" style="width:280px;" class="form-control" id="respnoseCompanyName" name="respnoseCompanyName" placeholder="课题负责人单位">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span class="requrie">负责人手机：</span>
+						<input type="text" style="width:280px;" class="form-control" id="taskTel" name="taskTel" placeholder="联系手机">
+					</td>
+					<td>
+						<span class="requrie">负责人邮箱：</span>
+						<input type="text" style="width:280px;" class="form-control" id="responseEmail" name="responseEmail" placeholder="邮箱地址">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span class="requrie">所在领域：</span>
+						&nbsp;&nbsp;<select name="subjectType" id="subjectType" class="js-example-basic-multiple" multiple="multiple" style="width:500px"></select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2">
+						<span>课题简介：</span>
+						<textarea placeholder="课题简介：" id="taskAbstract" name="taskAbstract"></textarea>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div class="form-action">
+			<!-- 提交 -->
+			<button type="button" id="subBtn" class="btn btn-success">提交</button>
+			<button type="button" id="closeBtn" class="btn btn-success">关闭</button>
+	    </div>
+	    </form>
+	</div>
+</body>
+</html>
+</#escape>

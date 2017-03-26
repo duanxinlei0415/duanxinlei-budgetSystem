@@ -1,0 +1,36 @@
+@charset "UTF-8";
+
+.ui-header{background: #0e90d2;; height:50px; padding: 0 50px;
+    /* background: -webkit-gradient(linear, left bottom, left top, color-stop(0, #555), color-stop(1, #0e90d2));
+    background: -ms-linear-gradient(bottom, #555, #0e90d2);
+    background: -moz-linear-gradient(center bottom, #555 0%, #0e90d2 100%);
+    background: -o-linear-gradient(bottom, #555, #0e90d2);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#555', EndColorStr='#0e90d2');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#0e90d2',EndColorStr='#555')"; */
+    -webkit-box-shadow: 0px 0px 3px #cccccc;
+    -moz-box-shadow: 0px 0px 3px #cccccc;
+    box-shadow: 0px 0px 3px #cccccc;
+}
+.ui-header > .ui-logo{display:block; height:100%; font-size:18px; color: #eee; float:left; line-height:50px;}
+.ui-header > .ui-logo > span{margin-right:5px;}
+.ui-header > .ui-menu{float:right; height:100%; position:relative;}
+.ui-header > .ui-menu > .ui-dropdown-toggle{line-height:50px;font-size:14px; color: #eee; display:block; height:100%;
+    padding:0 15px;
+}
+.ui-header > .ui-menu:hover > .ui-dropdown-toggle{background: #303030;color: #fff;}
+.ui-header > .ui-menu > .ui-dropdown-menu{display:none; position: absolute; top: 100%; right: 0;
+    z-index: 100; min-width: 160px; padding: 5px 0; padding: 2px 0 0; font-size: 14px;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, .15);
+    border-radius: 4px;
+    -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, .175);
+}
+.ui-header > .ui-menu:hover > .ui-dropdown-menu{display:block;}
+.ui-header > .ui-menu > .ui-dropdown-menu > .ui-divider{height: 1px; margin: 9px 0; overflow: hidden; background-color: #e5e5e5;}
+.ui-header > .ui-menu > .ui-dropdown-menu > .ui-dropdown-header{padding: 3px 20px; font-size: 12px; line-height: 1.42857143; color: #999;}
+.ui-header > .ui-menu > .ui-dropdown-menu a{ display: block; padding: 3px 20px;
+    line-height: 1.42857143; color: #333; white-space: nowrap;
+}
+.ui-header > .ui-menu > .ui-dropdown-menu a:hover{background-color: #cfd9e3;}

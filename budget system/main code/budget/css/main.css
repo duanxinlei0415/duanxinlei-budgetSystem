@@ -1,0 +1,459 @@
+@charset "UTF-8";
+
+body{overflow-x: hidden;}
+.main{background: #e9edf0 url(data:image/png;base64,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);
+	min-width:800px; margin:0 auto; font-size: 12px;
+}
+.wrap{overflow: hidden; padding:5px; max-width: 1280px; margin:0 auto; position: relative;}
+.main-nav{float:left;}
+.ui-nav-sidebar{}
+.ui-scrollbar{ min-width: 80px; background: #e6eaee;
+    box-shadow: -8px 0 2px -7px #d1d1d1; position: relative;
+}
+.ui-nav-list{ /*padding: 0 0 1em;*/ background: #e6eaee; box-shadow: -8px 0 2px -7px #d1d1d1;
+    /* border-top: 1px solid #fcfcfc; border-bottom: 1px solid #c8c8cb; border-right: 1px solid #d1d1d1\9; border-right: none\9\0; */
+}
+.ui-nav-list > li{}
+.ui-nav-list > li > a{color: #444; display: block; font-size: 1em; min-height:24px; max-height: 30px;
+    line-height: 2.5em; /*padding: .15em 1em;*/ margin-bottom: 0px; text-shadow: none; text-transform: none;
+    cursor: default;
+}
+.ui-nav-list > li > a > .ui-icon{ font-size:1.50em; margin-right: .5em; vertical-align:text-bottom;}
+.ui-nav-list > li > a > .ui-toggle{ font-size:.50em; margin-left: 1em; vertical-align:middle;}
+.ui-nav-list > li > a[data-nav-type]{cursor: pointer;}
+.ui-nav-list > li > a[data-nav-type]:hover{color: #000; background-color: #cfd9e3;}
+.ui-nav-list > li > a[data-nav-type].nav-current{color: #000; background-color: #cfd9e3;}
+.ui-sub{padding-left:.8em; background: #f9f9f9;}
+.ui-sub .ui-sub{background: #f1f1f1;}
+.ui-sub .ui-sub .ui-sub{background:#f9f9f9;}
+
+.nav-title{font-weight: 400; font-size: 16px; line-height: 1.42857143; color: #333; text-align:center; padding:20px 0 15px;
+    border-bottom: 2px solid #227dc5; /* box-shadow: 0 2px 2px 1px #d1d1d1; */ position:relative; overflow:hidden;
+}
+.nav-title >span{display:block; float:left; margin-left:5px;}
+
+.ui-nav-list > li > a > input{max-width:75px; max-height: 100%; font-size: 1em; line-height: 1;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing: border-box;
+    padding: .375rem;
+}
+
+.i-check {width: 100px; height: 30px; position: absolute; display:block; top: 18px; left:80px;}
+.i-check input[type=checkbox] {opacity: 0; position: absolute; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; cursor: pointer;
+	background:transparent;
+}
+.i-check label {width: 100px; height: 30px; cursor: pointer; position: absolute; top: 0; left: 0; background: #00bf04; border-radius: 15px;
+	display:block;
+}
+.i-check input[type=checkbox] + label:before,
+.i-check input[type=checkbox] + label:after{height:30px; line-height:30px; color:#fff; font-size:14px; font-weight:bold; width:80px; padding:0 10px;}
+.i-check input[type=checkbox] + label:before{content:attr(data-before); display:block; opacity: 1; text-align:left;}
+.i-check  input[type=checkbox] + label:after {content:attr(data-after); display:none; opacity: 0; text-align:right;
+	/* border: solid #fff; */
+    /* border-width:0 0 3px 3px; */
+    /* -ms-transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+	-o-transform:rotate(-45deg);
+    transform: rotate(-45deg); */
+}
+.i-check input[type=checkbox]:checked + label:before {opacity: 0; display:none;}
+.i-check input[type=checkbox]:checked + label:after {opacity: 1; display:block;}
+.i-check i {display:block; width:25px; height:25px; border-radius:50%; background:#f4f8f7; position:absolute; top: 3px;right:1px;}
+.i-check input[type=checkbox]:checked ~ i{left:1px;}
+
+.nav-wrap{width:154px;overflow:hidden; float:left;}
+
+.main-table{padding-left: 338px; padding-right: 30px;}
+/*迷你导航*/
+.mini-nav{ padding: 2.5em 0em 1em 1em; margin: 0 0em 2em 0em;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065);
+}
+.main .mini-nav a{color:#0e90d2; cursor: default;}
+.main .mini-nav a.current{color:#555;}
+
+
+.content-infor{margin: 0 0em 2em 0em; max-width: 100%;}
+.content-infor > h3{
+	font-size: 1em;
+	font-weight: normal;
+	min-height: 40px;
+    line-height: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    -moz-border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+}
+.content-infor textarea{resize: none; height: 100px; border:1px solid #e2e2e2; border-radius: 4px; background-color: #f9f9f9;
+	padding: 10px; display: block; width: 100%;
+	-moz-box-sizing:border-box;-webkit-box-sizing:border-box;box-sizing:border-box;
+}
+/*.content-infor textarea::-webkit-input-placeholder:after{
+	display:block;
+	content:"\A 请填写测算说明";
+}
+.content-infor textarea::-moz-placeholder:after{
+	content:"\A 请填写测算说明";
+}*/
+
+.container{max-width:100%;}
+.container .table.table-striped caption{
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+    text-align: left;
+}
+
+.container > table{width: 100%; table-layout: fixed; font-size: 12px;}
+.container > table tr td:first-child,
+.container > table tr th:first-child{width: 4%;}
+.container > table th,
+.container > table td{ padding:10px; font-weight: normal; text-align: center;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    -webkit-box-sizing:border-box;
+}
+.container > table td > .glyphicon{ font-size: 16px; color: #555; cursor: pointer;}
+.container > table td > .glyphicon:hover{color: red;}
+.container > table > tbody td > div{border: 1px solid #e2e2e2; border-radius: 4px; width: 100%; height: 100%;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+    padding: 8px;
+    line-height: 1.42857143;
+    vertical-align: top;
+    overflow-x: hidden; /*text-overflow: ellipsis;*/ white-space: nowrap;
+}
+.container > table > tbody td > div{ height: 40px;}/*默认无   跟后台的样式有问题*/
+.container > table > tbody td > div[contenteditable]{
+    border-color: rgb(77, 144, 254);}
+
+
+.right-box{position: fixed; top: 50px; right: 0px; overflow: hidden; }
+.right-box .tips-btn{float: left; }
+.right-box .tips-btn a{display: block; }
+.right-box .tips-btn > .tol-btn{display: none;}
+.right-box .tips-btn a{
+    display: block;
+    layout-flow: vertical-ideographic;
+    width:1.3em;
+    color: #fff;
+    cursor: pointer;
+    background-color: #72727B;
+    border-color: #2e6da4;
+    padding: 8px 3px 8px 5px;
+    margin: 5px 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+.right-box .tips-btn a span{background-color: transparent; }
+
+.right-box .tips-btn a:hover,
+.right-box .tips-btn a.current{background-color: #0e90d2;}
+.right-box .box-content{float: left; width: 0;}
+
+.flow-main{/*border:1px solid #a0b3d6;*/ background:white; border-radius: 4px;
+    margin-top: 0;}
+.right-box .box-content > .flow-container{display: none; position: static; }
+.right-box .box-content > .flow-container .main-content{width: inherit; }
+
+.right-box .box-content > .help-content{display: none; padding: 5px; }
+.right-box .box-content > .help-content .help-title{
+    line-height:24px;border-bottom:1px solid #a0b3d6; padding-left:5px;
+    color: #fff; font-size: 14px;
+    background: #0e90d2;
+}
+.right-box .box-content > .help-content .help-title span{
+    font-size: 20px;
+    float: right; display: inline-block;padding: 2px 5px;
+    cursor: pointer;
+}
+.right-box .box-content > .help-content .help-txt{
+    background: #fff; font-size:12px;
+    max-height: 200px;
+    padding: 10px 5px;
+    overflow-x: hidden;
+    text-indent: 2em;
+    line-height: 1.42857143;
+}
+.right-box .box-content > .help-content .help-pic{
+    overflow-y: scroll;
+    width: 100%;
+    height: 280px;
+    max-height: 300px;
+    padding:5px; background:#f0f3f9;
+}
+/* 购置设备费 */
+#equipmentPurchasePost tr th:nth-child(2){width: 17%;}
+#equipmentPurchasePost tr th:nth-child(3){width: 14%;}
+#equipmentPurchasePost tr th:nth-child(4){width: 10%;}
+#equipmentPurchasePost tr th:nth-child(5){width: 10%;}
+#equipmentPurchasePost tr th:nth-child(6){width: 11%;}
+#equipmentPurchasePost tr th:nth-child(7){width: 17%;}
+#equipmentPurchasePost tr th:nth-child(8){width: 17%;}
+/* 试制设备费 */
+#trialProductionEquipmentCost tr th:nth-child(2){width: 15%;}
+#trialProductionEquipmentCost tr th:nth-child(3){width: 17%;}
+#trialProductionEquipmentCost tr th:nth-child(4){width: 10%;}
+#trialProductionEquipmentCost tr th:nth-child(5){width: 10%;}
+#trialProductionEquipmentCost tr th:nth-child(6){width: 13%;}
+#trialProductionEquipmentCost tr th:nth-child(7){width: 16%;}
+#trialProductionEquipmentCost tr th:nth-child(8){width: 15%;}
+/* 设备改造与租赁费 */
+#rentalFee tr th:nth-child(2){width: 50%;}
+#rentalFee tr th:nth-child(3){width: 46%;}
+/* 材料费 */
+#materialsExpense tr th:nth-child(2){width: 32%;}
+#materialsExpense tr th:nth-child(3){width: 12%;}
+#materialsExpense tr th:nth-child(4){width: 12%;}
+#materialsExpense tr th:nth-child(5){width: 14%;}
+#materialsExpense tr th:nth-child(6){width: 26%;}
+/* 测试化验加工费 */
+#testFee tr th:nth-child(2){width: 17%;}
+#testFee tr th:nth-child(3){width: 17%;}
+#testFee tr th:nth-child(4){width: 8%;}
+#testFee tr th:nth-child(5){width: 16%;}
+#testFee tr th:nth-child(6){width: 11%;}
+#testFee tr th:nth-child(7){width: 12%;}
+#testFee tr th:nth-child(8){width: 15%;}
+/* 燃料动力费 */
+#fuelAndPowerCost tr th:nth-child(2){width: 30%;}
+#fuelAndPowerCost tr th:nth-child(3){width: 11%;}
+#fuelAndPowerCost tr th:nth-child(4){width: 11%;}
+#fuelAndPowerCost tr th:nth-child(5){width: 12%;}
+#fuelAndPowerCost tr th:nth-child(6){width: 14%;}
+#fuelAndPowerCost tr th:nth-child(7){width: 18%;}
+/* 差旅费 */
+#trivialExpense tr th:nth-child(2){width: 10%;}
+#trivialExpense tr th:nth-child(3){width: 10%;}
+#trivialExpense tr th:nth-child(4){width: 10%;}
+#trivialExpense tr th:nth-child(5){width: 16%;}
+#trivialExpense tr th:nth-child(6){width: 17%;}
+#trivialExpense tr th:nth-child(7){width: 16%;}
+#trivialExpense tr th:nth-child(8){width: 17%;}
+/* 会议费 */
+#conferenceExpenses tr th:nth-child(2){width: 22%;}
+#conferenceExpenses tr th:nth-child(3){width: 10%;}
+#conferenceExpenses tr th:nth-child(4){width: 10%;}
+#conferenceExpenses tr th:nth-child(5){width: 10%;}
+#conferenceExpenses tr th:nth-child(6){width: 12%;}
+#conferenceExpenses tr th:nth-child(7){width: 12%;}
+#conferenceExpenses tr th:nth-child(8){width: 20%;}
+/* 国际合作与交流费 */
+#internationalCooperationExchangeFee tr th:nth-child(2){width: 17%;}
+#internationalCooperationExchangeFee tr th:nth-child(3){width: 10%;}
+#internationalCooperationExchangeFee tr th:nth-child(4){width: 10%;}
+#internationalCooperationExchangeFee tr th:nth-child(5){width: 15%;}
+#internationalCooperationExchangeFee tr th:nth-child(6){width: 15%;}
+#internationalCooperationExchangeFee tr th:nth-child(7){width: 15%;}
+#internationalCooperationExchangeFee tr th:nth-child(8){width: 14%;}
+/* 出版/....../知识产权 */
+#publishingFee tr th:nth-child(2){width: 30%;}
+#publishingFee tr th:nth-child(3){width: 12%;}
+#publishingFee tr th:nth-child(4){width: 12%;}
+#publishingFee tr th:nth-child(5){width: 14%;}
+#publishingFee tr th:nth-child(6){width: 28%;}
+/* 劳务费 */
+#serviceFee tr th:nth-child(2){width: 23%;}
+#serviceFee tr th:nth-child(3){width: 10%;}
+#serviceFee tr th:nth-child(4){width: 10%;}
+#serviceFee tr th:nth-child(5){width: 13%;}
+#serviceFee tr th:nth-child(6){width: 16%;}
+#serviceFee tr th:nth-child(7){width: 24%;}
+/* 专家咨询费 */
+#expertConsultingFee tr th:nth-child(2){width: 16%;}
+#expertConsultingFee tr th:nth-child(3){width: 10%;}
+#expertConsultingFee tr th:nth-child(4){width: 10%;}
+#expertConsultingFee tr th:nth-child(5){width: 10%;}
+#expertConsultingFee tr th:nth-child(6){width: 10%;}
+#expertConsultingFee tr th:nth-child(7){width: 14%;}
+#expertConsultingFee tr th:nth-child(8){width: 10%;}
+#expertConsultingFee tr th:nth-child(9){width: 16%;}
+/*其他支出*/
+#otherExpense tr th:nth-child(2){width: 50%;}
+#otherExpense tr th:nth-child(3){width: 46%;}
+
+table caption {
+    min-height: 40px;
+    line-height: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    -moz-border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+}
+
+.flow-container{
+    padding:5px; background:#f0f3f9; font-size:12px; border-radius: 4px;
+    -moz-box-shadow:2px 2px 4px #666666; -webkit-box-shadow:2px 2px 4px #666666;
+}
+.flow-container .flow-bar{height: 28px; cursor:move;
+    font-size: 1em;
+    font-weight: normal;
+    min-height: 40px;
+    line-height: 40px;
+    padding-right: 20px;
+    padding-left: 20px;
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-top-left-radius: 4px;
+    -webkit-border-top-right-radius: 4px;
+    -moz-border-top-left-radius: 4px;
+    -moz-border-top-right-radius: 4px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+}
+.flow-main{/*border:1px solid #a0b3d6;*/ background:white; border-radius: 4px;}
+
+.main-bar{line-height:24px;border-bottom:1px solid #a0b3d6; padding-left:5px;
+    color: #fff; font-size: 14px;
+    background: #0e90d2;
+}
+.main-content{width:220px; max-height:250px; padding:10px 5px; overflow-x:hidden; text-indent: 2em;
+    line-height: 1.42857143;
+}
+.main-content ul li{list-style:decimal inside;}
+
+.btn-success {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #4cae4c;
+}
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.42857143;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.form-action{ text-align: center; max-width: 650px;}
+
+/*国家和地区 下拉框*/
+.location-wrap{position: absolute; top: 100px; left: 50%; background: #fff; display: none; font-size: 12px;}
+.location-wrap .location-list{
+    float: left;
+    height: 200px;
+    overflow-x: hidden;
+    width: 100px;
+    border:1px solid #0e90d2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.location-wrap .location-list li{border-bottom: 1px solid #d4d4d4; padding: .375em .75em;
+    overflow: hidden;white-space: nowrap;text-overflow: ellipsis; cursor: pointer;
+}
+.location-wrap .location-list.country li:hover{color: #000; background-color: #cfd9e3;}
+.location-wrap .location-list li.current{color: #000; background-color: #cfd9e3;}
+.location-wrap .location-list li span{float: right;}
+
+/*专家咨询费 下拉框类别选择*/
+.radio-type-wrap{position: absolute; top: 100px; left: 50%; background: #fff; display: none; font-size: 12px;}
+.radio-type-wrap .radio-type-list{
+    overflow-x: hidden; width: 100px; border:1px solid #0e90d2;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.radio-type-wrap li{border-bottom: 1px solid #d4d4d4; padding: .375em .75em;
+    overflow: hidden;white-space: nowrap;text-overflow: ellipsis; cursor: pointer;
+}
+.radio-type-wrap.country li:hover{color: #000; background-color: #cfd9e3;}
+.radio-type-wrap li.current{color: #000; background-color: #cfd9e3;}
+
+/*背景层*/
+.back-blur {
+    background-color: rgb(0,0,0);
+    opacity: .5;
+    filter: alpha(opacity=50);
+}
+/*间接费用 和 绩效支出 数据层*/
+.extra-pop{display: none; background:#fff; min-width: 350px; cursor: default; color: #787878;
+    border: 1px solid #cbcbcb; border-radius: 5px; box-shadow: 0 0 15px 0 rgba(0,0,0,.3); text-align: center;
+    padding: 25px;
+}
+.extra-pop .close{cursor: pointer; float: right; margin: -10px -10px 0 0; font-size: 24px;
+    transition: all .3s;
+    -moz-transition: all .3s;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+}
+.extra-pop .close:hover{color: red;}
+.extra-pop .value{max-width: 250px; margin:25px auto;}
+.extra-pop .value input,
+.extra-form-action{text-align: center;}

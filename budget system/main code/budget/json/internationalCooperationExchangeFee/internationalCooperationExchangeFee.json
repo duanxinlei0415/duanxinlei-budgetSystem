@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": ""
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "国家和地区,人数,天数,住宿公杂等说明,国际旅费(元/人次),合计(元),预算理由",
+            "listValue":[
+                             ",人数,天数,住宿公杂等说明,国际旅费,合计,预算理由",
+                             ",人数,天数,住宿公杂等说明,国际旅费,合计,预算理由"
+                        ]
+            },
+        "description":{
+            "title_desc": "国际合作与交流费的开支范围",
+            "description": "课题研究人员及外国专家来华工作的费用。应当严格执行国家外事经费管理的有关规定。",
+            "title_list": "国际合作与交流费的相关要求",
+            "list": "出国人员费用包括旅费、伙食费、公杂费、住宿费等,来货专家费包括国际旅费、专家食宿交通费、城市间交通费等,应说明每次国际合作交流活动内容,避免人数多、费用高、时间长的出国"
+        }
+        },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

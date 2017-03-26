@@ -1,0 +1,183 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>锐创动力-预算管理</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="this is my page">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <@h.head />
+    <@h.layer />
+    <style>
+		table caption{font-size: 24px; }
+		.ui-new{width: 800px; margin: 20px auto; position: relative; }
+		.ui-new h3{font-size: 16px; padding: 5px 10px; background-color: black; width: 150px; color: white; }
+		.ui-new table{width:800px;}
+		.ui-new table tr{}
+		.ui-new table tr td{background-color: white; border: 1px solid #ddd;height: 30px; height: 150px; }
+		.ui-new table tr td:first-child{width: 200px; }
+		.ui-new .btna{width: 200px; }
+	
+		.btna > a{font-size: 17.5px;
+					color: #fff;
+				    background-color: #5cb85c;
+				    border-color: #4cae4c;
+				    display: inline-block;
+				    padding: 8px 18px;
+				    margin-bottom: 0;
+				    font-size: 16px;
+				    font-weight: 400;
+				    line-height: 1.42857143;
+				    text-align: center;
+				    white-space: nowrap;
+				    vertical-align: middle;
+				    -ms-touch-action: manipulation;
+				    touch-action: manipulation;
+				    cursor: pointer;
+				    -webkit-user-select: none;
+				    -moz-user-select: none;
+				    -ms-user-select: none;
+				    user-select: none;
+				    background-image: none;
+				    border: 1px solid transparent;
+				    border-radius: 4px;
+				    margin: 30px auto;}
+	
+		.ui-scale{width:800px; margin: 20px auto; position: relative; }
+		.ui-scale h3{font-size: 16px; padding: 5px 10px; background-color: black; width: 150px; color: white; }
+		.ui-scale table{width:800px; }
+		.ui-scale table tr{}
+		/* .ui-scale table tr:nth-child(odd) td:nth-child(1),
+		.ui-scale table tr:nth-child(odd) td:nth-child(2){
+			background-color: #DBE3E4;
+		} */
+
+		.ui-scale table tr td{background-color: white; border: 1px solid #ddd;height: 30px; }
+		.ui-scale table tr td:first-child{width: 200px; }
+		.ui-scale table tr .btna{border-width: 0; width: 200px; border-right: 1px solid #ddd; }
+		.ui-scale table .line > td{
+				height: 15px;
+			    background-color: #fafafa;
+			    background-image: -moz-linear-gradient(top,#fff,#f2f2f2);
+			    background-image: -webkit-gradient(linear,0 0,0 100%,from(#fff),to(#f2f2f2));
+			    background-image: -webkit-linear-gradient(top,#fff,#f2f2f2);
+			    background-image: -o-linear-gradient(top,#fff,#f2f2f2);
+			    background-image: linear-gradient(to bottom,#fff,#f2f2f2);
+			    background-repeat: repeat-x;
+			    border: 1px solid #d4d4d4;
+			    -webkit-border-top-left-radius: 4px;
+			    -webkit-border-top-right-radius: 4px;
+			    -moz-border-top-left-radius: 4px;
+			    -moz-border-top-right-radius: 4px;
+			    border-top-left-radius: 4px;
+			    border-top-right-radius: 4px;
+			    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+			    -webkit-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+			    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+			    box-shadow: 0 1px 4px rgba(0,0,0,0.065), 1px 0 4px rgba(0,0,0,0.065);
+			}
+
+		a[title="more1"]{color: #57575a; position: absolute; top: 20px; right: 17px; font-size: 14px;}
+		a[title="more2"]{color: #57575a; position: absolute; top: 20px; right: 17px; font-size: 14px;}
+		a[title="more1"]:hover{color: #0e90d2}
+		a[title="more2"]:hover{color: #0e90d2}
+	</style>
+  </head>
+
+  <body>
+  	<@h.header />
+  	<!-- 主体 -->
+	<div class="ui-new">
+				<table>
+					<caption style="text-align: left">用户概览</caption>
+					<tr>
+						<td>牵头课题总数：${taskCount}</td>
+						<td>参与课题总数：${subTaskCount}</td>
+						<td class="btna">
+							<a id="newBtn">新建</a>
+						</td>
+					</tr>
+				</table>
+	</div>
+	
+	<div class="ui-content">
+		<div class="ui-main">
+			<div class="ui-scale">
+				<a href="javascript:void(0);" id="taskMore" title="more1">更多</a>
+				<table>
+						<caption style="text-align: left">我牵头的课题</caption>
+							<#if (taskDatas??)&&(taskDatas?size>0)>
+								<#list taskDatas as _data>
+							<tr>
+								<td>课题名称</td>
+								<td>
+									<#if _data.taskName?length lt 50   >   
+										${_data.taskName} 
+									<#else> 
+										${_data.taskName[0..49]}...
+									</#if>
+								</td>
+								<td class="btna" rowspan="3"><a class="taskBtn" data-id="${_data.id} ">管理预算</a><a class="taskLoadBtn" data-id="${_data.id} ">输出报表</a></td>
+							</tr>
+							<tr>
+								<td>课题编号</td>
+								<td>
+									<#if _data.taskCode?length lt 50   >   
+										${_data.taskCode} 
+									<#else> 
+										${_data.taskCode[0..49]}...
+									</#if>
+								</td>
+							</tr>
+							<tr>
+								<td>创建时间</td>
+								<td>
+									${_data.createTime} 
+								</td>
+							</tr>
+							<tr class="line">
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+								</#list>
+							</#if>
+				</table>	
+			</div>
+
+			<div class="ui-scale">
+				<a href="javascript:void(0);" id="subTaskMore" title="more2">更多</a>
+				<table>
+						<caption style="text-align: left">我参与的课题</caption>
+							<#if (subTaskDatas??)&&(subTaskDatas?size>0)>
+								<#list subTaskDatas as _data>
+							<tr>
+								<td>预算名称</td>
+								<td>
+									<#if _data.subTaskName?length lt 50   >   
+										${_data.subTaskName} 
+									<#else> 
+										${_data.subTaskName[0..49]}...
+									</#if>
+								</td>
+								<td class="btna" rowspan="1"><a class="subTaskBtn" data-id="${_data.id} ">编制预算</a><a class="loadBtn" data-id="${_data.id} ">输出报表</a></td>
+							</tr>
+							<tr class="line">
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+								</#list>
+							</#if>
+				</table>
+			</div>
+		</div>
+	</div>
+	<iframe id="downLoadIframe" src="" width="0" height="0" style="display:none"></iframe>
+  	<@h.footer />
+  </body>
+  <script type="text/javascript" src="${ctx}/js/index.js"></script>
+</html>
+</#escape>

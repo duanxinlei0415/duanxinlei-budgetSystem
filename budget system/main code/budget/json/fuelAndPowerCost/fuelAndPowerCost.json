@@ -1,0 +1,63 @@
+{
+    "statusCode": "200",
+    "status": "success",
+    "message": null,
+    "data": [
+    ],
+    "map": {
+        "info":{
+            "title": "测算说明",
+            "content": "",
+            "placeholder": ""
+            },
+        "table":{
+            "title": "详细测算",
+            "unit": "万元",
+            "list": "项目,单价(元),单位,用量,总金额(万元),说明",
+            "listValue":[
+                            "项目,单价,单位,用量,总金额,说明",
+                            "项目,单价,单位,用量,总金额,说明"
+                        ]
+            },
+        "description":{
+            "title_desc": "燃料动力费的开支范围",
+            "description": "在课题研究开发过程中相关大型仪器设备、专用科学装置等运行发生的可以单独计量的水、电、气、燃料消耗费用等。",
+            "title_list": "燃料动力费的相关要求",
+            "list": "是否可以单独计量,按运行时间、即期价格测算,与日常办公燃料动力费相区分,科学考察发生的车（船）燃油费可列支"
+        }
+        },
+    "page": {
+        "pageIndex": 1,
+        "pageSize": 10,
+        "totalCount": 4,
+        "pageCount": 1,
+        "sort": "desc",
+        "order": "id",
+        "firstPage": false,
+        "hasPrev": false,
+        "hasNext": false,
+        "lastPage": false,
+        "empty": false,
+        "firstResult": 0
+    },
+    "queryBean": {
+        "id": null,
+        "courseName": null,
+        "courseNameE": null,
+        "title": null,
+        "titleE": null,
+        "context": null,
+        "contextE": null,
+        "lessonNum": 0,
+        "logo": null,
+        "pageViewCount": 0,
+        "sort1": 0,
+        "state": null,
+        "clientIP": null,
+        "clientTime": null,
+        "clientUserName": "admin"
+    },
+    "totalRows": 4,
+    "curPage": 1,
+    "success": true
+}

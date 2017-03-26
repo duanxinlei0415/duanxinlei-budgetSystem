@@ -1,0 +1,154 @@
+<#escape x as x?html>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<title>我参与的课题</title>
+<meta name="description" content="">
+<meta name="keywords" content="">
+<@h.head />
+<@h.layer />
+<@h.bsGrid />
+<style>
+    .ms-controller{
+        visibility: hidden;
+    }
+    .ui-no-height{
+    	height:0;overflow:hidden;
+    }
+    .ui-holy{
+    	padding-left: 0px;
+    }
+    /*宽度*/
+    .main .main-content{
+    	max-width: 100%; width: 900px; margin: 20px auto; overflow: hidden; 
+    }
+    #tmenub {
+    	line-height: 28px;
+    	display: block;
+    	padding: 10px 20px 0px 20px;
+    	border-bottom: 1px solid #348EE0;
+    	margin-bottom: 10px;
+	}
+	#tmenub a.tb:link, #tmenub a.tb:visited {
+	    background-color: #4b9aeb;
+	    color: #eee;
+	    font-weight: bold;
+	    border-color: #348EE0;
+	}
+	#tmenub a:link, #tmenub a:visited {
+	    background-color: #f7f7f7;
+	    color: #333333;
+	    border: 1px solid;
+	    border-bottom: 0px;
+	    border-color: #79B9F6;
+	}
+	#tmenub a {
+	    float: left;
+	    margin: 0px 1px 0px 0px;
+	    line-height: 28px;
+	    text-align: center;
+	    text-decoration: none;
+	    padding: 0px 25px;
+	}
+	a:visited {
+	    font-size: 15px;
+	    color: #666666;
+	}
+	a:link {
+	    font-size: 15px;
+	    color: #666666;
+	}
+	.table{
+		
+	}
+	input[type="button"]{
+		margin: 0 5px; display: inline-block; 
+	}
+	input[type="search"]{
+		width: 200px; 
+	}
+	#xiangmu{margin: 10px auto 30px; font-size: 16px; max-width: 100%; width: 900px; padding: 0 20px; border:1px solid #CCCCFF; }
+	#xiangmu tr{}
+	#xiangmu td{line-height: 36px; padding: 10px 0; }
+	#xiangmu td > input[type="button"]{margin-top: 5px; }
+	.main .main-content .add{display: inline-block; float: right; }
+	.main .main-content .tab{max-width: 100%;height: 200px; border: 2px solid blue; margin: 5px 0 20px; }
+	.main .main-content .return{display: inline-block;}
+	.main .main-content .dantiao{min-height: 27px; max-height: 40px; border: 1px solid #CCCCFF; padding: 10px 30px; }
+	.main .main-content	.dantiao > span{float: right; line-height: 1.8; margin-right: 10px; }
+	.main .main-content .piliang{min-height: 27px; max-height: 40px; border: 1px solid #CCCCFF; padding: 10px 30px; margin:0 auto; }
+	.form-action{ text-align: center; max-width: 650px;margin:0 auto;}
+	/*按钮*/
+	.btn-success {
+	    color: #fff;
+	    background-color: #337ab7;
+	    border-color: #4cae4c;
+	}
+	.btn {
+	    display: inline-block;
+	    padding: 6px 12px;
+	    margin-bottom: 0;
+	    font-size: 14px;
+	    font-weight: 400;
+	    line-height: 1.42857143;
+	    text-align: center;
+	    white-space: nowrap;
+	    vertical-align: middle;
+	    -ms-touch-action: manipulation;
+	    touch-action: manipulation;
+	    cursor: pointer;
+	    -webkit-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+	    background-image: none;
+	    border: 1px solid transparent;
+	    border-radius: 4px;
+	}
+</style>
+<script type="text/javascript" src="${ctx}/js/common.js"></script>
+<script type="text/javascript" src="${ctx}/js/task/subTask/subTaskList.js"></script>
+</head>
+<body>
+	<@h.header />
+	<!-- 主体 -->
+	<div class="main ui-holy">
+		<!-- 详情 -->
+		<div class="ui-holy-main">
+			<div class="main-content">
+				<form id="searchForm">
+					<table id="xiangmu" class="table table-striped">
+						<tr>
+							<td>预算名称：</td>
+							<td><input class="form-control" name="subTaskName" type="search" placeholder="请输入预算名称"></td>
+							<td colspan="2"><input id="searchBtn" class="btn btn-success" type="button" value="查询"></td>
+						</tr>
+					</table>
+				</form>
+				<table id="searchTable" class="bsgrid table table-striped">
+					<caption>我参与的课题</caption>
+	    			<thead>
+						<tr class="active">
+						   <th w_num="line" width="5%;">序号</th>
+						   <th w_index="ID" w_hidden="true" width="5%;">ID</th>
+						   <th w_index="subTaskName" w_align="left" width="20%;">预算名称</th>
+						   <th w_render="operate" width="10%;">修改信息</th>
+						   <th w_render="operateDetail" width="10%;">编制预算</th>
+						   <th w_render="operateInvite" width="10%;">关联课题</th>
+						    <th w_render="operateDoc" width="10%;">输出报表</th>
+						</tr>
+					</thead>
+				</table>
+			</div>
+			<div class="form-action">
+				<button class="btn btn-success" id="returnBtn">返回</button>
+			</div>
+		</div>
+	</div>
+	<@h.footer />
+</body>
+<iframe id="downLoadIframe" src="" width="0" height="0" style="display:none"></iframe>
+</html>
+</#escape>
